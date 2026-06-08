@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Comercial — RIVEMA Jataí 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --red:       #C0131A;
+  --red-d:     #8B0E13;
+  --red-l:     #FDEAEA;
+  --red-m:     #F09595;
+  --green:     #1A5E38;
+  --green-l:   #E8F5EE;
+  --green-m:   #4CAF76;
+  --amber:     #854F0B;
+  --amber-l:   #FDF3E6;
+  --amber-m:   #EF9F27;
+  --blue:      #185FA5;
+  --blue-l:    #E6F1FB;
+  --blue-m:    #378ADD;
+  --gray:      #2C2C2C;
+  --gray-l:    #F5F5F3;
+  --gray-m:    #888780;
+  --border:    #E8E8E4;
+  --white:     #FFFFFF;
+  --text:      #1A1A1A;
+  --muted:     #6B6B6B;
+  --surface:   #F9F9F7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--surface);
+  color:var(--text);
+  font-size:14px;
+  line-height:1.6;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:220px;
+  background:var(--gray);
+  display:flex;flex-direction:column;
+  z-index:100;
+  overflow:hidden;
+}
+.sidebar-logo{
+  padding:1.5rem 1.25rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo h1{
+  font-size:16px;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1.2;
+}
+.sidebar-logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
+.sidebar-badge{
+  display:inline-block;background:var(--red);color:#fff;
+  font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;
+  margin-top:6px;letter-spacing:.06em;text-transform:uppercase;
+}
+.nav{padding:1rem 0;flex:1}
+.nav-label{
+  font-size:9px;font-weight:600;color:rgba(255,255,255,.3);
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.5rem 1.25rem .25rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:.6rem 1.25rem;cursor:pointer;
+  font-size:13px;color:rgba(255,255,255,.55);
+  border-left:2px solid transparent;
+  transition:all .15s;
+  user-select:none;
+}
+.nav-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.nav-item.active{
+  background:rgba(192,19,26,.15);color:#fff;
+  border-left-color:var(--red);
+}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.7}
+.nav-item.active svg{opacity:1}
+.sidebar-footer{
+  padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08);
+  font-size:11px;color:rgba(255,255,255,.3);line-height:1.5;
+}
+
+/* ── MAIN ── */
+.main{margin-left:220px;min-height:100vh;padding:2rem 2rem 3rem}
+
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem}
+.topbar-left h2{font-size:22px;font-weight:500;color:var(--text);letter-spacing:-.02em}
+.topbar-left p{font-size:13px;color:var(--muted);margin-top:2px}
+.search-wrap{position:relative}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);pointer-events:none}
+.search-input{
+  padding:.55rem .9rem .55rem 2.1rem;
+  border:1px solid var(--border);border-radius:8px;
+  font-family:inherit;font-size:13px;color:var(--text);
+  background:var(--white);width:240px;
+  outline:none;transition:border-color .15s;
+}
+.search-input:focus{border-color:var(--blue-m)}
+.search-input::placeholder{color:var(--muted)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab{
+  padding:.55rem 1.1rem;font-size:13px;cursor:pointer;
+  border-bottom:2px solid transparent;color:var(--muted);
+  margin-bottom:-1px;transition:all .15s;font-weight:400;
+  border-radius:6px 6px 0 0;
+}
+.tab:hover{color:var(--text);background:var(--gray-l)}
+.tab.active{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+
+/* ── SECTION ── */
+.section{display:none}
+.section.active{display:block}
+
+/* ── METRICS ── */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:1.5rem}
+.metric{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+.metric .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.metric .val{font-size:24px;font-weight:500;color:var(--text);letter-spacing:-.02em;margin-bottom:3px}
+.metric .chg{font-size:11px;font-family:'DM Mono',monospace}
+.up-good{color:var(--green)}.dn-bad{color:var(--red)}.neutral{color:var(--muted)}.c-amber{color:var(--amber)}.c-blue{color:var(--blue)}
+
+/* ── CARD ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.card-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.card-action{font-size:12px;color:var(--blue);cursor:pointer;padding:3px 8px;border-radius:5px}
+.card-action:hover{background:var(--blue-l)}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-bottom:1.25rem}
+
+/* ── COVERAGE BARS ── */
+.cov-item{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.cov-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.cov-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.cov-name{font-size:13px;font-weight:500;color:var(--text)}
+.cov-pct{font-size:13px;font-weight:500}
+.bar-track{height:8px;background:var(--gray-l);border-radius:10px;overflow:hidden;margin-bottom:.3rem}
+.bar-fill{height:100%;border-radius:10px;transition:width .6s ease}
+.cov-sub{font-size:11px;color:var(--muted)}
+
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{
+  text-align:left;font-weight:500;font-size:11px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;
+  padding:.55rem .75rem;border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+.data-table td{padding:.65rem .75rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tbody tr{cursor:pointer;transition:background .12s}
+.data-table tbody tr:hover{background:var(--gray-l)}
+.data-table tbody tr.selected{background:var(--blue-l)}
+.data-table td.num{text-align:right;font-family:'DM Mono',monospace;font-size:12px}
+.data-table td.right{text-align:right}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 9px;border-radius:20px;letter-spacing:.03em}
+.b-green{background:var(--green-l);color:#27500A}
+.b-amber{background:var(--amber-l);color:#633806}
+.b-red{background:var(--red-l);color:#791F1F}
+.b-blue{background:var(--blue-l);color:#0C447C}
+.b-gray{background:var(--gray-l);color:var(--muted)}
+
+/* ── PILLS ── */
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin:2px}
+.p-green{background:var(--green-l);color:var(--green)}
+.p-amber{background:var(--amber-l);color:var(--amber)}
+.p-red{background:var(--red-l);color:#791F1F}
+.p-blue{background:var(--blue-l);color:var(--blue)}
+
+/* ── VEND CARD ── */
+.vend-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vend-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;padding:1.1rem;
+  border-top:3px solid var(--border);
+  cursor:pointer;transition:all .15s;
+}
+.vend-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateY(-1px)}
+.vend-card.destaque{border-top-color:var(--green)}
+.vend-card.atencao{border-top-color:var(--amber-m)}
+.vend-card.integracao{border-top-color:var(--blue-m)}
+.vend-card.alert{border-top-color:var(--red)}
+.vcard-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
+.vcard-periodo{font-size:11px;color:var(--muted);margin-bottom:.75rem}
+.vcard-stat{display:flex;justify-content:space-between;font-size:12px;padding:.3rem 0;border-bottom:1px solid var(--border)}
+.vcard-stat:last-of-type{border-bottom:none}
+.vcard-lbl{color:var(--muted)}
+.vcard-val{font-weight:500;color:var(--text)}
+
+/* ── FILTROS ── */
+.filter-bar{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
+.filter-btn{
+  padding:.4rem .9rem;border:1px solid var(--border);border-radius:6px;
+  font-family:inherit;font-size:12px;color:var(--muted);cursor:pointer;
+  background:var(--white);transition:all .15s;
+}
+.filter-btn:hover{border-color:var(--blue-m);color:var(--blue)}
+.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.filter-select{
+  padding:.4rem .9rem;border:1px solid var(--border);border-radius:6px;
+  font-family:inherit;font-size:12px;color:var(--muted);
+  background:var(--white);cursor:pointer;outline:none;
+}
+.filter-select:focus{border-color:var(--blue-m)}
+
+/* ── STAT ROWS ── */
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.stat-row:last-child{border-bottom:none}
+.stat-lbl{color:var(--muted)}
+.stat-val{font-weight:500;color:var(--text)}
+
+/* ── CHART WRAP ── */
+.chart-wrap{position:relative;width:100%}
+
+/* ── SEARCH RESULTS ── */
+.search-results{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.search-empty{text-align:center;padding:3rem;color:var(--muted);font-size:14px}
+.search-count{font-size:12px;color:var(--muted);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+
+/* ── ALERT BOX ── */
+.alert-box{
+  background:var(--amber-l);border:1px solid #F7C1A0;border-radius:10px;
+  padding:.75rem 1rem;font-size:12px;color:var(--amber);
+  display:flex;gap:8px;align-items:flex-start;margin-bottom:1.25rem;
+}
+.alert-box svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
+
+/* ── TOOLTIP ── */
+.tooltip-card{
+  display:none;position:fixed;background:var(--gray);color:#fff;
+  border-radius:8px;padding:.75rem 1rem;font-size:12px;z-index:200;
+  pointer-events:none;min-width:180px;box-shadow:0 8px 24px rgba(0,0,0,.2);
+}
+
+/* ── PRINT ── */
+@media print{
+  .sidebar{display:none}
+  .main{margin-left:0;padding:1rem}
+  .tabs{display:none}
+  .section{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>RIVEMA Jataí</h1>
+    <p>Dashboard Comercial</p>
+    <span class="sidebar-badge">Jan–Mai 2026</span>
+  </div>
+  <div class="nav">
+    <div class="nav-label">Navegação</div>
+    <div class="nav-item active" onclick="goTab('visao-geral',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Visão geral
+    </div>
+    <div class="nav-item" onclick="goTab('vendedores',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Vendedores
+    </div>
+    <div class="nav-item" onclick="goTab('carteira',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Carteira
+    </div>
+    <div class="nav-item" onclick="goTab('busca',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Busca & filtros
+    </div>
+    <div class="nav-item" onclick="goTab('funil',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      Funil & conversão
+    </div>
+    <div class="nav-label" style="margin-top:.5rem">Ações</div>
+    <div class="nav-item" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Exportar PDF
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    Inteligência Comercial<br>Pedro Henrique Soligo<br>Grupo Rivema · 2026
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h2 id="page-title">Visão geral</h2>
+      <p id="page-sub">Desempenho comercial da equipe de Jataí — Jan a Mai 2026</p>
+    </div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" id="global-search" placeholder="Buscar vendedor, perfil..." oninput="globalSearch(this.value)">
+    </div>
+  </div>
+
+  <!-- ══ TAB: VISÃO GERAL ══ -->
+  <div id="tab-visao-geral" class="section active">
+
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="lbl">Visitas totais</div>
+        <div class="val">891</div>
+        <div class="chg neutral">Jan–Mai 2026</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Clientes visitados</div>
+        <div class="val">442</div>
+        <div class="chg neutral">de 728 na carteira</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Oportunidades</div>
+        <div class="val c-blue">32</div>
+        <div class="chg up-good">Pipeline ativo</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Negócios ganhos</div>
+        <div class="val up-good">2</div>
+        <div class="chg neutral">Paulo Pontelli</div>
+      </div>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="lbl">Cobertura média</div>
+        <div class="val c-amber">61%</div>
+        <div class="chg neutral">da carteira total visitada</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Melhor vis/semana</div>
+        <div class="val up-good">19.3</div>
+        <div class="chg neutral">Ricardo Oliveira</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Clientes não cobertos</div>
+        <div class="val dn-bad">286</div>
+        <div class="chg neutral">sem visita no período</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Taxa conv. visit→oport.</div>
+        <div class="val c-amber">3.6%</div>
+        <div class="chg neutral">média da equipe</div>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span><strong>Atenção:</strong> 39% da carteira (286 clientes) ainda não receberam visita no período. Danilo e Paulo têm as maiores lacunas proporcionalmente. Ricardo Prado tem apenas 10 dias úteis — dados não representativos.</span>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Cobertura de carteira por vendedor</div>
+        </div>
+        <div class="cov-item">
+          <div class="cov-header">
+            <span class="cov-name">Ricardo Oliveira</span>
+            <span class="cov-pct up-good">150%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green-m)"></div></div>
+          <div class="cov-sub">194 visitados / 129 carteira — prospectou além da base</div>
+        </div>
+        <div class="cov-item">
+          <div class="cov-header">
+            <span class="cov-name">Danilo Marques</span>
+            <span class="cov-pct c-amber">55%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--amber-m)"></div></div>
+          <div class="cov-sub">131 visitados / 238 carteira — 107 clientes não cobertos</div>
+        </div>
+        <div class="cov-item">
+          <div class="cov-header">
+            <span class="cov-name">Paulo Pontelli</span>
+            <span class="cov-pct c-amber">52%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:52%;background:var(--amber-m)"></div></div>
+          <div class="cov-sub">92 visitados / 178 carteira — melhor taxa de conversão</div>
+        </div>
+        <div class="cov-item">
+          <div class="cov-header">
+            <span class="cov-name">Ricardo Prado <span class="badge b-blue" style="margin-left:4px">integração</span></span>
+            <span class="cov-pct c-blue">14%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:14%;background:var(--blue-m)"></div></div>
+          <div class="cov-sub">25 visitados / 183 carteira — apenas 10 dias úteis</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Visitas por vendedor</div></div>
+        <div class="chart-wrap" style="height:240px">
+          <canvas id="c-visitas" role="img" aria-label="Visitas por vendedor: Ricardo Oliveira 409, Paulo 250, Danilo 204, Ricardo Prado 28">R.Oliveira: 409. Paulo: 250. Danilo: 204. R.Prado: 28.</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="g3">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Produtividade</div></div>
+        <div class="stat-row"><div class="stat-lbl">Danilo — vis/semana</div><div class="stat-val">9.6</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo — vis/semana</div><div class="stat-val">11.8</div></div>
+        <div class="stat-row"><div class="stat-lbl">R.Oliveira — vis/semana</div><div class="stat-val up-good">19.3</div></div>
+        <div class="stat-row"><div class="stat-lbl">R.Prado — vis/semana*</div><div class="stat-val c-amber">14.0</div></div>
+        <div class="stat-row"><div class="stat-lbl">Meta sugerida</div><div class="stat-val c-blue">15/semana</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Conversão</div></div>
+        <div class="stat-row"><div class="stat-lbl">Danilo visita→oport.</div><div class="stat-val c-amber">2.0%</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo visita→oport.</div><div class="stat-val up-good">7.2%</div></div>
+        <div class="stat-row"><div class="stat-lbl">R.Oliveira visita→oport.</div><div class="stat-val c-amber">2.0%</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo oport.→venda</div><div class="stat-val up-good">11.1%</div></div>
+        <div class="stat-row"><div class="stat-lbl">Meta oport.→venda</div><div class="stat-val c-blue">25%</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Carteira total</div></div>
+        <div class="stat-row"><div class="stat-lbl">Perfil A (&gt;1.001 ha)</div><div class="stat-val">337</div></div>
+        <div class="stat-row"><div class="stat-lbl">Perfil B (501–1.000 ha)</div><div class="stat-val">139</div></div>
+        <div class="stat-row"><div class="stat-lbl">Perfil C (201–500 ha)</div><div class="stat-val">91</div></div>
+        <div class="stat-row"><div class="stat-lbl">Perfil D (1–200 ha)</div><div class="stat-val">161</div></div>
+        <div class="stat-row"><div class="stat-lbl">Total</div><div class="stat-val" style="font-weight:600">728</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB: VENDEDORES ══ -->
+  <div id="tab-vendedores" class="section">
+    <div class="vend-cards" style="margin-bottom:1.25rem">
+
+      <div class="vend-card destaque" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('R. Oliveira')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+          <div>
+            <div class="vcard-name">Ricardo Oliveira</div>
+            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
+          </div>
+          <span class="badge b-green">Excelente campo</span>
+        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val up-good">409</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val up-good">19.3</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">194</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val up-good">150%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val">8</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val c-amber">2.0%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
+        <div style="margin-top:.75rem">
+          <span class="pill p-green">Alto volume</span>
+          <span class="pill p-amber">Conversão baixa</span>
+          <span class="pill p-red">0 vendas</span>
+        </div>
+      </div>
+
+      <div class="vend-card destaque" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Paulo')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+          <div>
+            <div class="vcard-name">Paulo Pontelli</div>
+            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
+          </div>
+          <span class="badge b-green">Alto desempenho</span>
+        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">250</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val">11.8</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">92</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-amber">52%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val up-good">18</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val up-good">7.2%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val up-good">2</span></div>
+        <div style="margin-top:.75rem">
+          <span class="pill p-green">Melhor conversão</span>
+          <span class="pill p-green">2 vendas</span>
+          <span class="pill p-amber">Cobertura parcial</span>
+        </div>
+      </div>
+
+      <div class="vend-card atencao" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Danilo')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+          <div>
+            <div class="vcard-name">Danilo Marques</div>
+            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
+          </div>
+          <span class="badge b-amber">Converter mais</span>
+        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">204</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val">9.6</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">131</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-amber">55%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val dn-bad">4</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val dn-bad">2.0%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
+        <div style="margin-top:.75rem">
+          <span class="pill p-amber">Volume razoável</span>
+          <span class="pill p-red">Conversão crítica</span>
+          <span class="pill p-red">0 vendas</span>
+        </div>
+      </div>
+
+      <div class="vend-card integracao" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Prado')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
+          <div>
+            <div class="vcard-name">Ricardo Prado</div>
+            <div class="vcard-periodo">18–30/Mai 2026 · 10 dias úteis · 2.0 semanas</div>
+          </div>
+          <span class="badge b-blue">Em integração</span>
+        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">28</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana*</span><span class="vcard-val c-amber">14.0</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">25</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-blue">14%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val">2</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.*</span><span class="vcard-val">7.1%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
+        <div style="margin-top:.75rem">
+          <span class="pill p-blue">10 dias úteis</span>
+          <span class="pill p-blue">Dados parciais</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">Comparativo da equipe</div></div>
+      <div class="chart-wrap" style="height:260px">
+        <canvas id="c-comparativo" role="img" aria-label="Comparativo de visitas, clientes visitados e oportunidades por vendedor">Danilo: 204 vis, 131 cli, 4 oport. Paulo: 250, 92, 18. R.Oliveira: 409, 194, 8. R.Prado: 28, 25, 2.</canvas>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:11px;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#D3D1C7;display:inline-block"></span>Carteira total</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#EF9F27;display:inline-block"></span>Clientes visitados</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#378ADD;display:inline-block"></span>Oportunidades</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#C0131A;display:inline-block"></span>Vendas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB: CARTEIRA ══ -->
+  <div id="tab-carteira" class="section">
+    <div class="g2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Distribuição por perfil</div></div>
+        <div class="chart-wrap" style="height:240px">
+          <canvas id="c-perfil" role="img" aria-label="Distribuição por perfil: A 337, B 139, C 91, D 161">Perfil A: 337. B: 139. C: 91. D: 161.</canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Perfil A por vendedor</div></div>
+        <div class="chart-wrap" style="height:240px">
+          <canvas id="c-perfilA" role="img" aria-label="Clientes perfil A: Danilo 117, Paulo 81, R.Oliveira 68, R.Prado 71">Danilo: 117. Paulo: 81. R.Oliveira: 68. R.Prado: 71.</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">Carteira detalhada por vendedor e perfil</div></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Vendedor</th>
+            <th class="right">Perfil A</th>
+            <th class="right">Perfil B</th>
+            <th class="right">Perfil C</th>
+            <th class="right">Perfil D</th>
+            <th class="right">Total carteira</th>
+            <th class="right">Visitados</th>
+            <th class="right">% Cobertura</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Danilo Marques</strong></td>
+            <td class="num">117</td><td class="num">76</td><td class="num">21</td><td class="num">24</td>
+            <td class="num"><strong>238</strong></td>
+            <td class="num">131</td>
+            <td class="num c-amber">55%</td>
+            <td><span class="badge b-amber">Parcial</span></td>
+          </tr>
+          <tr>
+            <td><strong>Paulo Pontelli</strong></td>
+            <td class="num">81</td><td class="num">26</td><td class="num">29</td><td class="num">42</td>
+            <td class="num"><strong>178</strong></td>
+            <td class="num">92</td>
+            <td class="num c-amber">52%</td>
+            <td><span class="badge b-amber">Parcial</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ricardo Oliveira</strong></td>
+            <td class="num">68</td><td class="num">16</td><td class="num">17</td><td class="num">28</td>
+            <td class="num"><strong>129</strong></td>
+            <td class="num up-good">194</td>
+            <td class="num up-good">150%</td>
+            <td><span class="badge b-green">Excelente</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ricardo Prado</strong></td>
+            <td class="num">71</td><td class="num">21</td><td class="num">24</td><td class="num">67</td>
+            <td class="num"><strong>183</strong></td>
+            <td class="num">25</td>
+            <td class="num c-blue">14%*</td>
+            <td><span class="badge b-blue">Integração</span></td>
+          </tr>
+          <tr style="background:var(--gray-l)">
+            <td><strong>TOTAL</strong></td>
+            <td class="num"><strong>337</strong></td><td class="num"><strong>139</strong></td><td class="num"><strong>91</strong></td><td class="num"><strong>161</strong></td>
+            <td class="num"><strong>728</strong></td>
+            <td class="num"><strong>442</strong></td>
+            <td class="num"><strong>61%</strong></td>
+            <td><span class="badge b-amber">Parcial</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TAB: BUSCA ══ -->
+  <div id="tab-busca" class="section">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filtroVend('todos',this)">Todos</button>
+      <button class="filter-btn" onclick="filtroVend('Danilo',this)">Danilo</button>
+      <button class="filter-btn" onclick="filtroVend('Paulo',this)">Paulo</button>
+      <button class="filter-btn" onclick="filtroVend('R. Oliveira',this)">R. Oliveira</button>
+      <button class="filter-btn" onclick="filtroVend('R. Prado',this)">R. Prado</button>
+      <select class="filter-select" id="filtro-perfil" onchange="renderTabela()">
+        <option value="todos">Todos os perfis</option>
+        <option value="A">Perfil A</option>
+        <option value="B">Perfil B</option>
+        <option value="C">Perfil C</option>
+        <option value="D">Perfil D</option>
+      </select>
+      <select class="filter-select" id="filtro-status" onchange="renderTabela()">
+        <option value="todos">Todos os status</option>
+        <option value="destaque">Destaque</option>
+        <option value="atencao">Atenção</option>
+        <option value="integracao">Integração</option>
+      </select>
+      <input class="search-input" type="text" id="busca-tabela" placeholder="Buscar..." oninput="renderTabela()" style="width:180px;margin-left:auto">
+    </div>
+
+    <p class="search-count" id="search-count">Mostrando todos os registros</p>
+
+    <div class="search-results">
+      <table class="data-table" style="width:100%">
+        <thead>
+          <tr>
+            <th>Vendedor</th>
+            <th>Perfil</th>
+            <th class="right">Carteira</th>
+            <th class="right">Visitados</th>
+            <th class="right">Cobertura</th>
+            <th class="right">Visitas</th>
+            <th class="right">Vis/Sem</th>
+            <th class="right">Oport.</th>
+            <th class="right">Conv. vis→op</th>
+            <th class="right">Vendas</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TAB: FUNIL ══ -->
+  <div id="tab-funil" class="section">
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="lbl">Carteira total</div>
+        <div class="val">728</div>
+        <div class="chg neutral">clientes cadastrados</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Visitados</div>
+        <div class="val c-amber">442</div>
+        <div class="chg neutral">61% da carteira</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Com oportunidade</div>
+        <div class="val c-blue">32</div>
+        <div class="chg neutral">3.6% dos visitados</div>
+      </div>
+      <div class="metric">
+        <div class="lbl">Convertidos</div>
+        <div class="val up-good">2</div>
+        <div class="chg neutral">6.3% das oportunidades</div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Funil completo — grupo</div></div>
+        <div class="chart-wrap" style="height:280px">
+          <canvas id="c-funil" role="img" aria-label="Funil: 728 carteira, 442 visitados, 32 oportunidades, 2 vendas">Carteira: 728. Visitados: 442. Oport.: 32. Vendas: 2.</canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Conversão por vendedor</div></div>
+        <div class="chart-wrap" style="height:280px">
+          <canvas id="c-conv" role="img" aria-label="Taxa de conversão por vendedor: Paulo 7.2%, R.Oliveira 2%, Danilo 2%, R.Prado 7.1%">Paulo: 7.2%. R.Oliveira: 2%. Danilo: 2%. R.Prado: 7.1%.</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">Análise de oportunidades — por vendedor</div></div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Vendedor</th>
+            <th class="right">Visitas</th>
+            <th class="right">Oportunidades</th>
+            <th class="right">Conv. vis→oport.</th>
+            <th class="right">Vendas</th>
+            <th class="right">Conv. oport.→venda</th>
+            <th class="right">Faturamento</th>
+            <th>Análise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Paulo Pontelli</strong></td>
+            <td class="num">250</td><td class="num">18</td>
+            <td class="num up-good">7.2%</td>
+            <td class="num up-good">2</td>
+            <td class="num up-good">11.1%</td>
+            <td class="num">R$ 505.000</td>
+            <td><span class="badge b-green">Melhor conversão</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ricardo Oliveira</strong></td>
+            <td class="num">409</td><td class="num">8</td>
+            <td class="num c-amber">2.0%</td>
+            <td class="num neutral">0</td>
+            <td class="num neutral">—</td>
+            <td class="num neutral">—</td>
+            <td><span class="badge b-amber">Qualificar leads</span></td>
+          </tr>
+          <tr>
+            <td><strong>Danilo Marques</strong></td>
+            <td class="num">204</td><td class="num">4</td>
+            <td class="num dn-bad">2.0%</td>
+            <td class="num neutral">0</td>
+            <td class="num neutral">—</td>
+            <td class="num neutral">—</td>
+            <td><span class="badge b-red">Revisar abordagem</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ricardo Prado *</strong></td>
+            <td class="num">28</td><td class="num">2</td>
+            <td class="num c-blue">7.1%</td>
+            <td class="num neutral">0</td>
+            <td class="num neutral">—</td>
+            <td class="num neutral">—</td>
+            <td><span class="badge b-blue">10 dias úteis</span></td>
+          </tr>
+          <tr style="background:var(--gray-l)">
+            <td><strong>Total</strong></td>
+            <td class="num"><strong>891</strong></td><td class="num"><strong>32</strong></td>
+            <td class="num"><strong>3.6%</strong></td>
+            <td class="num"><strong>2</strong></td>
+            <td class="num"><strong>6.3%</strong></td>
+            <td class="num"><strong>R$ 505.000</strong></td>
+            <td><span class="badge b-amber">Abaixo da meta</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--muted);margin-top:.75rem">* Ricardo Prado: dados de 10 dias úteis — não representativos do ritmo definitivo.</p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const DADOS = [
+  {vendedor:'Danilo Marques',  perfil:'A',carteira:117,visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
+  {vendedor:'Danilo Marques',  perfil:'B',carteira:76, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
+  {vendedor:'Danilo Marques',  perfil:'C',carteira:21, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
+  {vendedor:'Danilo Marques',  perfil:'D',carteira:24, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
+  {vendedor:'Paulo Pontelli',  perfil:'A',carteira:81, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
+  {vendedor:'Paulo Pontelli',  perfil:'B',carteira:26, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
+  {vendedor:'Paulo Pontelli',  perfil:'C',carteira:29, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
+  {vendedor:'Paulo Pontelli',  perfil:'D',carteira:42, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
+  {vendedor:'R. Oliveira',     perfil:'A',carteira:68, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
+  {vendedor:'R. Oliveira',     perfil:'B',carteira:16, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
+  {vendedor:'R. Oliveira',     perfil:'C',carteira:17, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
+  {vendedor:'R. Oliveira',     perfil:'D',carteira:28, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
+  {vendedor:'R. Prado',        perfil:'A',carteira:71, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
+  {vendedor:'R. Prado',        perfil:'B',carteira:21, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
+  {vendedor:'R. Prado',        perfil:'C',carteira:24, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
+  {vendedor:'R. Prado',        perfil:'D',carteira:67, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
+];
+
+let filtroAtualVend = 'todos';
+
+function goTab(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  const titles = {
+    'visao-geral': ['Visão geral','Desempenho comercial da equipe de Jataí — Jan a Mai 2026'],
+    'vendedores':  ['Vendedores','Perfil detalhado de cada vendedor'],
+    'carteira':    ['Carteira','Distribuição de clientes por perfil e vendedor'],
+    'busca':       ['Busca & filtros','Pesquise e filtre por vendedor, perfil e status'],
+    'funil':       ['Funil & conversão','Taxa de conversão — visita → oportunidade → venda'],
+  };
+  if (titles[id]) {
+    document.getElementById('page-title').textContent = titles[id][0];
+    document.getElementById('page-sub').textContent   = titles[id][1];
+  }
+  if (id === 'busca') renderTabela();
+}
+
+function filtroVend(v, btn) {
+  filtroAtualVend = v;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderTabela();
+}
+
+function filtrarVendedor(v) {
+  filtroAtualVend = v;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === v || (v === 'todos' && b.textContent.trim() === 'Todos'));
+  });
+  renderTabela();
+}
+
+function renderTabela() {
+  const busca   = (document.getElementById('busca-tabela')?.value || '').toLowerCase();
+  const perfil  = document.getElementById('filtro-perfil')?.value  || 'todos';
+  const status  = document.getElementById('filtro-status')?.value  || 'todos';
+
+  let dados = DADOS.filter(d => {
+    if (filtroAtualVend !== 'todos' && !d.vendedor.toLowerCase().includes(filtroAtualVend.toLowerCase())) return false;
+    if (perfil !== 'todos' && d.perfil !== perfil) return false;
+    if (status !== 'todos' && d.status !== status) return false;
+    if (busca && !d.vendedor.toLowerCase().includes(busca) && !d.perfil.toLowerCase().includes(busca)) return false;
+    return true;
+  });
+
+  const count = document.getElementById('search-count');
+  count.textContent = `Mostrando ${dados.length} registro${dados.length !== 1 ? 's' : ''}`;
+
+  const statusMap = {
+    destaque:   ['b-green','Destaque'],
+    atencao:    ['b-amber','Atenção'],
+    integracao: ['b-blue','Integração'],
+  };
+
+  const tbody = document.getElementById('tabela-body');
+  if (!dados.length) {
+    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:2rem;color:var(--muted)">Nenhum resultado encontrado</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = dados.map(d => {
+    const [bc, bl] = statusMap[d.status] || ['b-gray','—'];
+    const covColor = d.cobertura >= 100 ? 'up-good' : d.cobertura >= 50 ? 'c-amber' : 'c-blue';
+    const convColor = d.convVis >= 5 ? 'up-good' : d.convVis >= 3 ? 'c-amber' : 'dn-bad';
+    return `<tr>
+      <td><strong>${d.vendedor}</strong></td>
+      <td><span class="badge b-gray">Perfil ${d.perfil}</span></td>
+      <td class="num">${d.carteira}</td>
+      <td class="num">${d.visitados}</td>
+      <td class="num ${covColor}">${d.cobertura}%</td>
+      <td class="num">${d.visitas}</td>
+      <td class="num">${d.visSem.toFixed(1)}</td>
+      <td class="num">${d.oport}</td>
+      <td class="num ${convColor}">${d.convVis.toFixed(1)}%</td>
+      <td class="num ${d.vendas > 0 ? 'up-good' : 'neutral'}">${d.vendas}</td>
+      <td><span class="badge ${bc}">${bl}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function globalSearch(val) {
+  const v = val.toLowerCase().trim();
+  if (!v) return;
+  goTab('busca', document.querySelector('.nav-item:nth-child(5)'));
+  document.getElementById('busca-tabela').value = val;
+  renderTabela();
+}
+
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size   = 11;
+const txt  = '#6B6B6B';
+const grid = 'rgba(0,0,0,0.05)';
+const scaleOpts = {
+  x: { ticks:{color:txt}, grid:{display:false}, border:{display:false} },
+  y: { ticks:{color:txt}, grid:{color:grid},    border:{display:false}, beginAtZero:true }
+};
+
+new Chart(document.getElementById('c-visitas'), {
+  type:'bar',
+  data:{
+    labels:['Danilo','Paulo','R. Oliveira','R. Prado*'],
+    datasets:[{data:[204,250,409,28],backgroundColor:['#EF9F27','#4CAF76','#639922','#378ADD'],borderWidth:0}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+});
+
+new Chart(document.getElementById('c-comparativo'), {
+  type:'bar',
+  data:{
+    labels:['Danilo','Paulo','R. Oliveira','R. Prado'],
+    datasets:[
+      {label:'Carteira total',     data:[238,178,129,183],backgroundColor:'#D3D1C7',borderWidth:0},
+      {label:'Clientes visitados', data:[131, 92,194, 25],backgroundColor:'#EF9F27',borderWidth:0},
+      {label:'Oportunidades',      data:[  4, 18,  8,  2],backgroundColor:'#378ADD',borderWidth:0},
+      {label:'Vendas',             data:[  0,  2,  0,  0],backgroundColor:'#C0131A',borderWidth:0},
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+});
+
+new Chart(document.getElementById('c-perfil'), {
+  type:'doughnut',
+  data:{
+    labels:['Perfil A (>1.001ha)','Perfil B (501–1.000ha)','Perfil C (201–500ha)','Perfil D (1–200ha)'],
+    datasets:[{data:[337,139,91,161],backgroundColor:['#C0131A','#EF9F27','#378ADD','#D3D1C7'],borderWidth:2,borderColor:'#fff'}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{padding:12,font:{size:11},color:txt}},
+      tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed} clientes`}}
+    }
+  }
+});
+
+new Chart(document.getElementById('c-perfilA'), {
+  type:'bar',
+  data:{
+    labels:['Danilo','Paulo','R. Oliveira','R. Prado'],
+    datasets:[{label:'Perfil A',data:[117,81,68,71],backgroundColor:['#EF9F27','#4CAF76','#639922','#378ADD'],borderWidth:0}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+});
+
+new Chart(document.getElementById('c-funil'), {
+  type:'bar',
+  data:{
+    labels:['Carteira','Visitados','Oportunidades','Vendas'],
+    datasets:[{data:[728,442,32,2],backgroundColor:['#D3D1C7','#EF9F27','#378ADD','#4CAF76'],borderWidth:0}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+});
+
+new Chart(document.getElementById('c-conv'), {
+  type:'bar',
+  data:{
+    labels:['Paulo','R. Prado*','R. Oliveira','Danilo'],
+    datasets:[{data:[7.2,7.1,2.0,2.0],backgroundColor:['#4CAF76','#378ADD','#EF9F27','#E24B4A'],borderWidth:0}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`Conv: ${ctx.parsed.y.toFixed(1)}%`}}},
+    scales:{
+      x:{ticks:{color:txt},grid:{display:false},border:{display:false}},
+      y:{ticks:{color:txt,callback:v=>v+'%'},grid:{color:grid},border:{display:false},beginAtZero:true}
+    }
+  }
+});
+
+renderTabela();
+</script>
+</body>
+</html>
