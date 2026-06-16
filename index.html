@@ -4,177 +4,92 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Comercial — RIVEMA Jataí 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-:root {
-  --red:       #C0131A;
-  --red-d:     #8B0E13;
-  --red-l:     #FDEAEA;
-  --red-m:     #F09595;
-  --green:     #1A5E38;
-  --green-l:   #E8F5EE;
-  --green-m:   #4CAF76;
-  --amber:     #854F0B;
-  --amber-l:   #FDF3E6;
-  --amber-m:   #EF9F27;
-  --blue:      #185FA5;
-  --blue-l:    #E6F1FB;
-  --blue-m:    #378ADD;
-  --gray:      #2C2C2C;
-  --gray-l:    #F5F5F3;
-  --gray-m:    #888780;
-  --border:    #E8E8E4;
-  --white:     #FFFFFF;
-  --text:      #1A1A1A;
-  --muted:     #6B6B6B;
-  --surface:   #F9F9F7;
+:root{
+  --red:#C0131A;--red-d:#8B0E13;--red-l:#FDEAEA;--red-m:#F09595;
+  --green:#1A5E38;--green-l:#E8F5EE;--green-m:#4CAF76;
+  --amber:#854F0B;--amber-l:#FDF3E6;--amber-m:#EF9F27;
+  --blue:#185FA5;--blue-l:#E6F1FB;--blue-m:#378ADD;
+  --gray:#2C2C2C;--gray-l:#F5F5F3;--gray-m:#888780;
+  --border:#E8E8E4;--white:#FFFFFF;--text:#1A1A1A;--muted:#6B6B6B;
+  --surface:#F4F4F2;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--surface);
-  color:var(--text);
-  font-size:14px;
-  line-height:1.6;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
-}
+body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);font-size:14px;line-height:1.6;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
 /* ── SIDEBAR ── */
-.sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:220px;
-  background:var(--gray);
-  display:flex;flex-direction:column;
-  z-index:100;
-  overflow:hidden;
-}
-.sidebar-logo{
-  padding:1.5rem 1.25rem 1rem;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.sidebar-logo h1{
-  font-size:16px;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1.2;
-}
-.sidebar-logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px}
-.sidebar-badge{
-  display:inline-block;background:var(--red);color:#fff;
-  font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;
-  margin-top:6px;letter-spacing:.06em;text-transform:uppercase;
-}
-.nav{padding:1rem 0;flex:1}
-.nav-label{
-  font-size:9px;font-weight:600;color:rgba(255,255,255,.3);
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:.5rem 1.25rem .25rem;
-}
-.nav-item{
-  display:flex;align-items:center;gap:10px;
-  padding:.6rem 1.25rem;cursor:pointer;
-  font-size:13px;color:rgba(255,255,255,.55);
-  border-left:2px solid transparent;
-  transition:all .15s;
-  user-select:none;
-}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:230px;background:var(--gray);display:flex;flex-direction:column;z-index:100;overflow:hidden}
+.sb-logo{padding:1.4rem 1.25rem .9rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo h1{font-size:15px;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1.3}
+.sb-logo p{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.sb-badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:5px;letter-spacing:.06em;text-transform:uppercase}
+.nav{padding:.75rem 0;flex:1;overflow-y:auto}
+.nav-label{font-size:9px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.25rem .2rem}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.55rem 1.25rem;cursor:pointer;font-size:13px;color:rgba(255,255,255,.55);border-left:2px solid transparent;transition:all .15s;user-select:none}
 .nav-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
-.nav-item.active{
-  background:rgba(192,19,26,.15);color:#fff;
-  border-left-color:var(--red);
-}
-.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.7}
+.nav-item.active{background:rgba(192,19,26,.18);color:#fff;border-left-color:var(--red)}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;opacity:.7}
 .nav-item.active svg{opacity:1}
-.sidebar-footer{
-  padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08);
-  font-size:11px;color:rgba(255,255,255,.3);line-height:1.5;
-}
+.nav-divider{height:1px;background:rgba(255,255,255,.06);margin:.5rem 1.25rem}
+.sb-footer{padding:.85rem 1.25rem;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:rgba(255,255,255,.3);line-height:1.5}
 
 /* ── MAIN ── */
-.main{margin-left:220px;min-height:100vh;padding:2rem 2rem 3rem}
+.main{margin-left:230px;min-height:100vh;padding:1.75rem 1.75rem 3rem}
 
 /* ── TOPBAR ── */
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem}
-.topbar-left h2{font-size:22px;font-weight:500;color:var(--text);letter-spacing:-.02em}
-.topbar-left p{font-size:13px;color:var(--muted);margin-top:2px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:12px}
+.topbar-left h2{font-size:20px;font-weight:500;color:var(--text);letter-spacing:-.02em}
+.topbar-left p{font-size:12px;color:var(--muted);margin-top:2px}
 .search-wrap{position:relative}
-.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--muted);pointer-events:none}
-.search-input{
-  padding:.55rem .9rem .55rem 2.1rem;
-  border:1px solid var(--border);border-radius:8px;
-  font-family:inherit;font-size:13px;color:var(--text);
-  background:var(--white);width:240px;
-  outline:none;transition:border-color .15s;
-}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted);pointer-events:none}
+.search-input{padding:.48rem .85rem .48rem 2rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;color:var(--text);background:var(--white);width:220px;outline:none;transition:border-color .15s}
 .search-input:focus{border-color:var(--blue-m)}
 .search-input::placeholder{color:var(--muted)}
 
-/* ── TABS ── */
-.tabs{display:flex;gap:4px;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0}
-.tab{
-  padding:.55rem 1.1rem;font-size:13px;cursor:pointer;
-  border-bottom:2px solid transparent;color:var(--muted);
-  margin-bottom:-1px;transition:all .15s;font-weight:400;
-  border-radius:6px 6px 0 0;
-}
-.tab:hover{color:var(--text);background:var(--gray-l)}
-.tab.active{color:var(--red);border-bottom-color:var(--red);font-weight:500}
-
-/* ── SECTION ── */
-.section{display:none}
-.section.active{display:block}
+/* ── SECTIONS ── */
+.section{display:none}.section.active{display:block}
 
 /* ── METRICS ── */
-.metrics-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:1.5rem}
-.metric{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
-.metric .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.metric .val{font-size:24px;font-weight:500;color:var(--text);letter-spacing:-.02em;margin-bottom:3px}
-.metric .chg{font-size:11px;font-family:'DM Mono',monospace}
-.up-good{color:var(--green)}.dn-bad{color:var(--red)}.neutral{color:var(--muted)}.c-amber{color:var(--amber)}.c-blue{color:var(--blue)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.metrics-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.metric{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.metric .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.metric .val{font-size:21px;font-weight:500;color:var(--text);letter-spacing:-.02em;margin-bottom:2px}
+.metric .sub{font-size:11px;color:var(--muted)}
+.c-red{color:var(--red)!important}.c-green{color:var(--green)!important}.c-amber{color:var(--amber)!important}.c-blue{color:var(--blue)!important}
 
-/* ── CARD ── */
-.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
-.card-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.card-action{font-size:12px;color:var(--blue);cursor:pointer;padding:3px 8px;border-radius:5px}
-.card-action:hover{background:var(--blue-l)}
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;padding-bottom:.65rem;border-bottom:1px solid var(--border)}
+.card-title{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.card-sub{font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)}
 
-/* ── GRID ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
-.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-bottom:1.25rem}
-
-/* ── COVERAGE BARS ── */
-.cov-item{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.cov-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.cov-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
-.cov-name{font-size:13px;font-weight:500;color:var(--text)}
-.cov-pct{font-size:13px;font-weight:500}
-.bar-track{height:8px;background:var(--gray-l);border-radius:10px;overflow:hidden;margin-bottom:.3rem}
-.bar-fill{height:100%;border-radius:10px;transition:width .6s ease}
-.cov-sub{font-size:11px;color:var(--muted)}
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-bottom:1.2rem}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
 
 /* ── TABLE ── */
-.data-table{width:100%;border-collapse:collapse;font-size:13px}
-.data-table th{
-  text-align:left;font-weight:500;font-size:11px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.05em;
-  padding:.55rem .75rem;border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
-.data-table td{padding:.65rem .75rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tbody tr{cursor:pointer;transition:background .12s}
-.data-table tbody tr:hover{background:var(--gray-l)}
-.data-table tbody tr.selected{background:var(--blue-l)}
-.data-table td.num{text-align:right;font-family:'DM Mono',monospace;font-size:12px}
-.data-table td.right{text-align:right}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;font-weight:500;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding:.5rem .7rem;border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+.tbl th:hover{color:var(--text)}
+.tbl td{padding:.58rem .7rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr{cursor:pointer;transition:background .1s}
+.tbl tbody tr:hover{background:#F9F7F5}
+.tbl td.mono{font-family:'DM Mono',monospace;font-size:11.5px}
+.tbl td.right{text-align:right}
 
 /* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 9px;border-radius:20px;letter-spacing:.03em}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.02em;white-space:nowrap}
 .b-green{background:var(--green-l);color:#27500A}
 .b-amber{background:var(--amber-l);color:#633806}
 .b-red{background:var(--red-l);color:#791F1F}
 .b-blue{background:var(--blue-l);color:#0C447C}
 .b-gray{background:var(--gray-l);color:var(--muted)}
+.b-purple{background:#EEEDFE;color:#3C3489}
 
 /* ── PILLS ── */
 .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin:2px}
@@ -183,802 +98,903 @@ body{
 .p-red{background:var(--red-l);color:#791F1F}
 .p-blue{background:var(--blue-l);color:var(--blue)}
 
-/* ── VEND CARD ── */
-.vend-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.vend-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:12px;padding:1.1rem;
-  border-top:3px solid var(--border);
-  cursor:pointer;transition:all .15s;
-}
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.fbtn{padding:.32rem .8rem;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;color:var(--muted);cursor:pointer;background:var(--white);transition:all .15s;white-space:nowrap}
+.fbtn:hover{border-color:var(--blue-m);color:var(--blue)}
+.fbtn.active{background:var(--red);color:#fff;border-color:var(--red)}
+.fselect{padding:.32rem .8rem;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;color:var(--text);background:var(--white);cursor:pointer;outline:none}
+.fselect:focus{border-color:var(--blue-m)}
+.f-count{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-left:auto}
+
+/* ── COVERAGE BARS ── */
+.cov-item{margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid var(--border)}
+.cov-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.cov-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem}
+.cov-name{font-size:13px;font-weight:500;color:var(--text)}
+.cov-pct{font-size:13px;font-weight:500}
+.bar-track{height:7px;background:var(--gray-l);border-radius:10px;overflow:hidden;margin-bottom:.28rem}
+.bar-fill{height:100%;border-radius:10px}
+.cov-sub{font-size:11px;color:var(--muted)}
+
+/* ── HBAR ── */
+.hbar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.hbar-label{font-size:12px;color:var(--text);width:185px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar-track{flex:1;height:7px;background:var(--gray-l);border-radius:10px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:10px;transition:width .5s ease}
+.hbar-val{font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);width:100px;text-align:right;flex-shrink:0}
+
+/* ── VEND CARDS ── */
+.vend-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:1.2rem}
+.vend-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1rem;border-top:3px solid var(--border);cursor:pointer;transition:all .15s}
 .vend-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateY(-1px)}
 .vend-card.destaque{border-top-color:var(--green)}
 .vend-card.atencao{border-top-color:var(--amber-m)}
 .vend-card.integracao{border-top-color:var(--blue-m)}
-.vend-card.alert{border-top-color:var(--red)}
-.vcard-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
-.vcard-periodo{font-size:11px;color:var(--muted);margin-bottom:.75rem}
-.vcard-stat{display:flex;justify-content:space-between;font-size:12px;padding:.3rem 0;border-bottom:1px solid var(--border)}
+.vcard-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.vcard-periodo{font-size:11px;color:var(--muted);margin-bottom:.65rem}
+.vcard-stat{display:flex;justify-content:space-between;font-size:12px;padding:.28rem 0;border-bottom:1px solid var(--border)}
 .vcard-stat:last-of-type{border-bottom:none}
-.vcard-lbl{color:var(--muted)}
-.vcard-val{font-weight:500;color:var(--text)}
+.vcard-lbl{color:var(--muted)}.vcard-val{font-weight:500;color:var(--text)}
 
-/* ── FILTROS ── */
-.filter-bar{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
-.filter-btn{
-  padding:.4rem .9rem;border:1px solid var(--border);border-radius:6px;
-  font-family:inherit;font-size:12px;color:var(--muted);cursor:pointer;
-  background:var(--white);transition:all .15s;
-}
-.filter-btn:hover{border-color:var(--blue-m);color:var(--blue)}
-.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.filter-select{
-  padding:.4rem .9rem;border:1px solid var(--border);border-radius:6px;
-  font-family:inherit;font-size:12px;color:var(--muted);
-  background:var(--white);cursor:pointer;outline:none;
-}
-.filter-select:focus{border-color:var(--blue-m)}
-
-/* ── STAT ROWS ── */
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:13px}
-.stat-row:last-child{border-bottom:none}
-.stat-lbl{color:var(--muted)}
-.stat-val{font-weight:500;color:var(--text)}
-
-/* ── CHART WRAP ── */
+/* ── CHART ── */
 .chart-wrap{position:relative;width:100%}
 
-/* ── SEARCH RESULTS ── */
-.search-results{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.search-empty{text-align:center;padding:3rem;color:var(--muted);font-size:14px}
-.search-count{font-size:12px;color:var(--muted);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+/* ── FUNIL ── */
+.funil-wrap{display:flex;flex-direction:column;gap:7px;padding:.4rem 0}
+.funil-step{display:flex;align-items:center;gap:10px}
+.funil-bar-outer{flex:1;height:34px;background:var(--gray-l);border-radius:6px;overflow:hidden}
+.funil-bar-inner{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:12px;font-weight:500;color:#fff;transition:width .6s ease;white-space:nowrap;overflow:hidden}
+.funil-label{font-size:12px;color:var(--muted);width:160px;flex-shrink:0}
+.funil-val{font-size:12px;font-family:'DM Mono',monospace;color:var(--muted);width:90px;text-align:right;flex-shrink:0}
 
-/* ── ALERT BOX ── */
-.alert-box{
-  background:var(--amber-l);border:1px solid #F7C1A0;border-radius:10px;
-  padding:.75rem 1rem;font-size:12px;color:var(--amber);
-  display:flex;gap:8px;align-items:flex-start;margin-bottom:1.25rem;
-}
-.alert-box svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
+/* ── STAT ROW ── */
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.stat-row:last-child{border-bottom:none}
+.stat-lbl{color:var(--muted)}.stat-val{font-weight:500;color:var(--text)}
 
-/* ── TOOLTIP ── */
-.tooltip-card{
-  display:none;position:fixed;background:var(--gray);color:#fff;
-  border-radius:8px;padding:.75rem 1rem;font-size:12px;z-index:200;
-  pointer-events:none;min-width:180px;box-shadow:0 8px 24px rgba(0,0,0,.2);
-}
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:14px;padding:1.4rem;width:620px;max-width:95vw;max-height:85vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:.9rem;right:.9rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:2px 6px;border-radius:4px}
+.modal-close:hover{background:var(--gray-l)}
+.modal-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.9rem;padding-right:2rem}
+.modal-field{display:flex;justify-content:space-between;padding:.38rem 0;border-bottom:1px solid var(--border);font-size:13px}
+.modal-field:last-child{border-bottom:none}
+.modal-field-label{color:var(--muted)}
+.modal-field-value{font-weight:500;color:var(--text);text-align:right;max-width:60%}
+.modal-section{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:1rem 0 .4rem}
 
-/* ── PRINT ── */
-@media print{
-  .sidebar{display:none}
-  .main{margin-left:0;padding:1rem}
-  .tabs{display:none}
-  .section{display:block!important}
-}
+/* ── ALERT ── */
+.alert-box{background:var(--amber-l);border:1px solid #F7C1A0;border-radius:10px;padding:.65rem 1rem;font-size:12px;color:var(--amber);display:flex;gap:8px;align-items:flex-start;margin-bottom:1.2rem}
+.alert-box svg{width:14px;height:14px;flex-shrink:0;margin-top:1px}
+
+@media print{.sidebar{display:none}.main{margin-left:0;padding:1rem}.section{display:block!important}}
+@page{size:A3 landscape;margin:1cm}
 </style>
 </head>
 <body>
 
+<!-- MODAL NEGOCIAÇÃO -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
 <!-- SIDEBAR -->
 <nav class="sidebar">
-  <div class="sidebar-logo">
+  <div class="sb-logo">
     <h1>RIVEMA Jataí</h1>
     <p>Dashboard Comercial</p>
-    <span class="sidebar-badge">Jan–Mai 2026</span>
+    <span class="sb-badge">2026</span>
   </div>
   <div class="nav">
-    <div class="nav-label">Navegação</div>
-    <div class="nav-item active" onclick="goTab('visao-geral',this)">
+    <div class="nav-label">Visão geral</div>
+    <div class="nav-item active" onclick="goTab('home',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Visão geral
+      Resumo geral
     </div>
+
+    <div class="nav-label" style="margin-top:.4rem">Equipe comercial</div>
     <div class="nav-item" onclick="goTab('vendedores',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       Vendedores
     </div>
     <div class="nav-item" onclick="goTab('carteira',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Carteira
+      Carteira de clientes
     </div>
-    <div class="nav-item" onclick="goTab('busca',this)">
+    <div class="nav-item" onclick="goTab('busca-carteira',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      Busca & filtros
+      Busca — carteira
     </div>
-    <div class="nav-item" onclick="goTab('funil',this)">
+
+    <div class="nav-label" style="margin-top:.4rem">Negociações</div>
+    <div class="nav-item" onclick="goTab('neg-visao',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Visão pipeline
+    </div>
+    <div class="nav-item" onclick="goTab('neg-produtos',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Produtos
+    </div>
+    <div class="nav-item" onclick="goTab('neg-funil',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-      Funil & conversão
+      Funil & etapas
     </div>
-    <div class="nav-label" style="margin-top:.5rem">Ações</div>
+    <div class="nav-item" onclick="goTab('neg-lista',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Todos os negócios
+    </div>
+
+    <div class="nav-divider"></div>
     <div class="nav-item" onclick="window.print()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       Exportar PDF
     </div>
   </div>
-  <div class="sidebar-footer">
-    Inteligência Comercial<br>Pedro Henrique Soligo<br>Grupo Rivema · 2026
-  </div>
+  <div class="sb-footer">Pedro Henrique Soligo<br>Grupo Rivema · 2026</div>
 </nav>
 
 <!-- MAIN -->
 <main class="main">
-
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-left">
-      <h2 id="page-title">Visão geral</h2>
-      <p id="page-sub">Desempenho comercial da equipe de Jataí — Jan a Mai 2026</p>
+      <h2 id="page-title">Resumo geral</h2>
+      <p id="page-sub">Visão consolidada — equipe comercial e pipeline de negociações</p>
     </div>
     <div class="search-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="search-input" type="text" id="global-search" placeholder="Buscar vendedor, perfil..." oninput="globalSearch(this.value)">
+      <input class="search-input" type="text" id="g-search" placeholder="Buscar cliente, produto..." oninput="globalSearch(this.value)">
     </div>
   </div>
 
-  <!-- ══ TAB: VISÃO GERAL ══ -->
-  <div id="tab-visao-geral" class="section active">
-
-    <div class="metrics-grid">
-      <div class="metric">
-        <div class="lbl">Visitas totais</div>
-        <div class="val">891</div>
-        <div class="chg neutral">Jan–Mai 2026</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Clientes visitados</div>
-        <div class="val">442</div>
-        <div class="chg neutral">de 728 na carteira</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Oportunidades</div>
-        <div class="val c-blue">32</div>
-        <div class="chg up-good">Pipeline ativo</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Negócios ganhos</div>
-        <div class="val up-good">2</div>
-        <div class="chg neutral">Paulo Pontelli</div>
-      </div>
+  <!-- ══════════════════════════════════════════
+       HOME — RESUMO GERAL
+  ══════════════════════════════════════════ -->
+  <div id="tab-home" class="section active">
+    <div class="metrics-5">
+      <div class="metric"><div class="lbl">Total visitas</div><div class="val">891</div><div class="sub">Jan–Mai 2026</div></div>
+      <div class="metric"><div class="lbl">Clientes visitados</div><div class="val c-amber">442</div><div class="sub">de 728 na carteira</div></div>
+      <div class="metric"><div class="lbl">Pipeline total</div><div class="val c-green">R$ 122M</div><div class="sub">73 negócios ativos</div></div>
+      <div class="metric"><div class="lbl">Oportunidades CRM</div><div class="val c-blue">32</div><div class="sub">Em funil ativo</div></div>
+      <div class="metric"><div class="lbl">Vendas fechadas</div><div class="val c-green">2</div><div class="sub">Paulo Pontelli</div></div>
     </div>
-    <div class="metrics-grid">
-      <div class="metric">
-        <div class="lbl">Cobertura média</div>
-        <div class="val c-amber">61%</div>
-        <div class="chg neutral">da carteira total visitada</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Melhor vis/semana</div>
-        <div class="val up-good">19.3</div>
-        <div class="chg neutral">Ricardo Oliveira</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Clientes não cobertos</div>
-        <div class="val dn-bad">286</div>
-        <div class="chg neutral">sem visita no período</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Taxa conv. visit→oport.</div>
-        <div class="val c-amber">3.6%</div>
-        <div class="chg neutral">média da equipe</div>
-      </div>
-    </div>
-
-    <div class="alert-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span><strong>Atenção:</strong> 39% da carteira (286 clientes) ainda não receberam visita no período. Danilo e Paulo têm as maiores lacunas proporcionalmente. Ricardo Prado tem apenas 10 dias úteis — dados não representativos.</span>
-    </div>
-
     <div class="g2">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">Cobertura de carteira por vendedor</div>
-        </div>
+        <div class="card-header"><div class="card-title">Cobertura de carteira</div></div>
         <div class="cov-item">
-          <div class="cov-header">
-            <span class="cov-name">Ricardo Oliveira</span>
-            <span class="cov-pct up-good">150%</span>
-          </div>
+          <div class="cov-header"><span class="cov-name">Ricardo Oliveira</span><span class="cov-pct c-green">150%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--green-m)"></div></div>
-          <div class="cov-sub">194 visitados / 129 carteira — prospectou além da base</div>
+          <div class="cov-sub">194 visitados / 129 carteira · prospectou além da base</div>
         </div>
         <div class="cov-item">
-          <div class="cov-header">
-            <span class="cov-name">Danilo Marques</span>
-            <span class="cov-pct c-amber">55%</span>
-          </div>
+          <div class="cov-header"><span class="cov-name">Danilo Marques</span><span class="cov-pct c-amber">55%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--amber-m)"></div></div>
-          <div class="cov-sub">131 visitados / 238 carteira — 107 clientes não cobertos</div>
+          <div class="cov-sub">131 visitados / 238 carteira · 107 clientes não cobertos</div>
         </div>
         <div class="cov-item">
-          <div class="cov-header">
-            <span class="cov-name">Paulo Pontelli</span>
-            <span class="cov-pct c-amber">52%</span>
-          </div>
+          <div class="cov-header"><span class="cov-name">Paulo Pontelli</span><span class="cov-pct c-amber">52%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:52%;background:var(--amber-m)"></div></div>
-          <div class="cov-sub">92 visitados / 178 carteira — melhor taxa de conversão</div>
+          <div class="cov-sub">92 visitados / 178 carteira · melhor taxa de conversão</div>
         </div>
         <div class="cov-item">
-          <div class="cov-header">
-            <span class="cov-name">Ricardo Prado <span class="badge b-blue" style="margin-left:4px">integração</span></span>
-            <span class="cov-pct c-blue">14%</span>
-          </div>
+          <div class="cov-header"><span class="cov-name">Ricardo Prado <span class="badge b-blue">integração</span></span><span class="cov-pct c-blue">14%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:14%;background:var(--blue-m)"></div></div>
-          <div class="cov-sub">25 visitados / 183 carteira — apenas 10 dias úteis</div>
+          <div class="cov-sub">25 visitados / 183 carteira · apenas 10 dias úteis</div>
         </div>
       </div>
-
       <div class="card">
-        <div class="card-header"><div class="card-title">Visitas por vendedor</div></div>
-        <div class="chart-wrap" style="height:240px">
-          <canvas id="c-visitas" role="img" aria-label="Visitas por vendedor: Ricardo Oliveira 409, Paulo 250, Danilo 204, Ricardo Prado 28">R.Oliveira: 409. Paulo: 250. Danilo: 204. R.Prado: 28.</canvas>
+        <div class="card-header"><div class="card-title">Pipeline por grupo de produto</div></div>
+        <div class="chart-wrap" style="height:230px">
+          <canvas id="c-home-grupos" role="img" aria-label="Pipeline por grupo: Plantio R$90,7M, Pulverização R$17,5M, Adubação R$5,7M, outros">Plantio: 90,7M. Pulverização: 17,5M. Adubação: 5,7M.</canvas>
         </div>
       </div>
     </div>
-
     <div class="g3">
       <div class="card">
-        <div class="card-header"><div class="card-title">Produtividade</div></div>
-        <div class="stat-row"><div class="stat-lbl">Danilo — vis/semana</div><div class="stat-val">9.6</div></div>
-        <div class="stat-row"><div class="stat-lbl">Paulo — vis/semana</div><div class="stat-val">11.8</div></div>
-        <div class="stat-row"><div class="stat-lbl">R.Oliveira — vis/semana</div><div class="stat-val up-good">19.3</div></div>
-        <div class="stat-row"><div class="stat-lbl">R.Prado — vis/semana*</div><div class="stat-val c-amber">14.0</div></div>
-        <div class="stat-row"><div class="stat-lbl">Meta sugerida</div><div class="stat-val c-blue">15/semana</div></div>
+        <div class="card-header"><div class="card-title">Visitas / semana</div></div>
+        <div class="stat-row"><div class="stat-lbl">Danilo Marques</div><div class="stat-val">9.6</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">11.8</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val c-green">19.3</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Prado*</div><div class="stat-val c-amber">14.0</div></div>
+        <div class="stat-row"><div class="stat-lbl">Meta sugerida</div><div class="stat-val c-blue">15/sem</div></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Conversão</div></div>
-        <div class="stat-row"><div class="stat-lbl">Danilo visita→oport.</div><div class="stat-val c-amber">2.0%</div></div>
-        <div class="stat-row"><div class="stat-lbl">Paulo visita→oport.</div><div class="stat-val up-good">7.2%</div></div>
-        <div class="stat-row"><div class="stat-lbl">R.Oliveira visita→oport.</div><div class="stat-val c-amber">2.0%</div></div>
-        <div class="stat-row"><div class="stat-lbl">Paulo oport.→venda</div><div class="stat-val up-good">11.1%</div></div>
-        <div class="stat-row"><div class="stat-lbl">Meta oport.→venda</div><div class="stat-val c-blue">25%</div></div>
+        <div class="card-header"><div class="card-title">Pipeline por vendedor</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val">R$ 55,4M</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">R$ 35,7M</div></div>
+        <div class="stat-row"><div class="stat-lbl">R. Prado</div><div class="stat-val">R$ 25,9M</div></div>
+        <div class="stat-row"><div class="stat-lbl">Danilo Marques</div><div class="stat-val">R$ 22,7M</div></div>
+        <div class="stat-row"><div class="stat-lbl">Total</div><div class="stat-val c-green">R$ 122M</div></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Carteira total</div></div>
-        <div class="stat-row"><div class="stat-lbl">Perfil A (&gt;1.001 ha)</div><div class="stat-val">337</div></div>
-        <div class="stat-row"><div class="stat-lbl">Perfil B (501–1.000 ha)</div><div class="stat-val">139</div></div>
-        <div class="stat-row"><div class="stat-lbl">Perfil C (201–500 ha)</div><div class="stat-val">91</div></div>
-        <div class="stat-row"><div class="stat-lbl">Perfil D (1–200 ha)</div><div class="stat-val">161</div></div>
-        <div class="stat-row"><div class="stat-lbl">Total</div><div class="stat-val" style="font-weight:600">728</div></div>
+        <div class="card-header"><div class="card-title">Funil — distribuição</div></div>
+        <div class="stat-row"><div class="stat-lbl">Intenção de compra</div><div class="stat-val c-amber">52 neg.</div></div>
+        <div class="stat-row"><div class="stat-lbl">Em negociação</div><div class="stat-val c-blue">8 neg.</div></div>
+        <div class="stat-row"><div class="stat-lbl">Proposta / Usados</div><div class="stat-val c-blue">5 neg.</div></div>
+        <div class="stat-row"><div class="stat-lbl">Bancos / Aprovações</div><div class="stat-val c-red">7 neg.</div></div>
+        <div class="stat-row"><div class="stat-lbl">Aguard. Faturamento</div><div class="stat-val c-green">1 neg.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ══ TAB: VENDEDORES ══ -->
+  <!-- ══════════════════════════════════════════
+       VENDEDORES
+  ══════════════════════════════════════════ -->
   <div id="tab-vendedores" class="section">
-    <div class="vend-cards" style="margin-bottom:1.25rem">
-
-      <div class="vend-card destaque" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('R. Oliveira')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
-          <div>
-            <div class="vcard-name">Ricardo Oliveira</div>
-            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
-          </div>
+    <div class="vend-cards">
+      <div class="vend-card destaque">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
+          <div><div class="vcard-name">Ricardo Oliveira Alves</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
           <span class="badge b-green">Excelente campo</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val up-good">409</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val up-good">19.3</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val c-green">409</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val c-green">19.3</span></div>
         <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">194</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val up-good">150%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val">8</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val c-amber">2.0%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
-        <div style="margin-top:.75rem">
-          <span class="pill p-green">Alto volume</span>
-          <span class="pill p-amber">Conversão baixa</span>
-          <span class="pill p-red">0 vendas</span>
-        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-green">150%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val">8</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 55,4M</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.</span><span class="vcard-val c-amber">2.0%</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-green">Alto volume</span><span class="pill p-amber">Converter mais</span></div>
       </div>
-
-      <div class="vend-card destaque" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Paulo')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
-          <div>
-            <div class="vcard-name">Paulo Pontelli</div>
-            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
-          </div>
+      <div class="vend-card destaque">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
+          <div><div class="vcard-name">Paulo Pontelli</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
           <span class="badge b-green">Alto desempenho</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">250</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val">11.8</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">250</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val">11.8</span></div>
         <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">92</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-amber">52%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val up-good">18</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val up-good">7.2%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val up-good">2</span></div>
-        <div style="margin-top:.75rem">
-          <span class="pill p-green">Melhor conversão</span>
-          <span class="pill p-green">2 vendas</span>
-          <span class="pill p-amber">Cobertura parcial</span>
-        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">52%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val c-green">18</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 35,7M</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Vendas fechadas</span><span class="vcard-val c-green">2</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-green">Melhor conversão</span><span class="pill p-green">2 vendas</span></div>
       </div>
-
-      <div class="vend-card atencao" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Danilo')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
-          <div>
-            <div class="vcard-name">Danilo Marques</div>
-            <div class="vcard-periodo">Jan–Mai 2026 · 106 dias úteis · 21.2 semanas</div>
-          </div>
+      <div class="vend-card atencao">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
+          <div><div class="vcard-name">Danilo Marques</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
           <span class="badge b-amber">Converter mais</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">204</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana</span><span class="vcard-val">9.6</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">204</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val">9.6</span></div>
         <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">131</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-amber">55%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val dn-bad">4</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.</span><span class="vcard-val dn-bad">2.0%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
-        <div style="margin-top:.75rem">
-          <span class="pill p-amber">Volume razoável</span>
-          <span class="pill p-red">Conversão crítica</span>
-          <span class="pill p-red">0 vendas</span>
-        </div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">55%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val c-red">4</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 22,7M</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.</span><span class="vcard-val c-red">2.0%</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-amber">Volume razoável</span><span class="pill p-red">Conversão crítica</span></div>
       </div>
-
-      <div class="vend-card integracao" onclick="goTab('busca',document.querySelector('[onclick*=busca]'));filtrarVendedor('Prado')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem">
-          <div>
-            <div class="vcard-name">Ricardo Prado</div>
-            <div class="vcard-periodo">18–30/Mai 2026 · 10 dias úteis · 2.0 semanas</div>
-          </div>
+      <div class="vend-card integracao">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
+          <div><div class="vcard-name">Ricardo Prado</div><div class="vcard-periodo">18–30/Mai 2026 · 10 dias · 2.0 semanas</div></div>
           <span class="badge b-blue">Em integração</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Total visitas</span><span class="vcard-val">28</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas/semana*</span><span class="vcard-val c-amber">14.0</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">28</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana*</span><span class="vcard-val c-amber">14.0</span></div>
         <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">25</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura carteira</span><span class="vcard-val c-blue">14%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades</span><span class="vcard-val">2</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conversão vis→oport.*</span><span class="vcard-val">7.1%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Negócios ganhos</span><span class="vcard-val neutral">0</span></div>
-        <div style="margin-top:.75rem">
-          <span class="pill p-blue">10 dias úteis</span>
-          <span class="pill p-blue">Dados parciais</span>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-blue">14%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val">2</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 25,9M</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.*</span><span class="vcard-val">7.1%</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-blue">10 dias úteis</span><span class="pill p-blue">Dados parciais</span></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Visitas realizadas</div></div>
+        <div class="chart-wrap" style="height:200px">
+          <canvas id="c-vend-vis" role="img" aria-label="Visitas: R.Oliveira 409, Paulo 250, Danilo 204, R.Prado 28">R.Oliveira: 409. Paulo: 250. Danilo: 204. R.Prado: 28.</canvas>
         </div>
       </div>
-
-    </div>
-
-    <div class="card">
-      <div class="card-header"><div class="card-title">Comparativo da equipe</div></div>
-      <div class="chart-wrap" style="height:260px">
-        <canvas id="c-comparativo" role="img" aria-label="Comparativo de visitas, clientes visitados e oportunidades por vendedor">Danilo: 204 vis, 131 cli, 4 oport. Paulo: 250, 92, 18. R.Oliveira: 409, 194, 8. R.Prado: 28, 25, 2.</canvas>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:11px;color:var(--muted)">
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#D3D1C7;display:inline-block"></span>Carteira total</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#EF9F27;display:inline-block"></span>Clientes visitados</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#378ADD;display:inline-block"></span>Oportunidades</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#C0131A;display:inline-block"></span>Vendas</span>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Pipeline de negociações (R$)</div></div>
+        <div id="vend-pipeline-bars"></div>
       </div>
     </div>
   </div>
 
-  <!-- ══ TAB: CARTEIRA ══ -->
+  <!-- ══════════════════════════════════════════
+       CARTEIRA
+  ══════════════════════════════════════════ -->
   <div id="tab-carteira" class="section">
     <div class="g2">
       <div class="card">
         <div class="card-header"><div class="card-title">Distribuição por perfil</div></div>
-        <div class="chart-wrap" style="height:240px">
-          <canvas id="c-perfil" role="img" aria-label="Distribuição por perfil: A 337, B 139, C 91, D 161">Perfil A: 337. B: 139. C: 91. D: 161.</canvas>
+        <div class="chart-wrap" style="height:220px">
+          <canvas id="c-perfil" role="img" aria-label="Perfis: A 337, B 139, C 91, D 161">A:337. B:139. C:91. D:161.</canvas>
         </div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">Perfil A por vendedor</div></div>
-        <div class="chart-wrap" style="height:240px">
-          <canvas id="c-perfilA" role="img" aria-label="Clientes perfil A: Danilo 117, Paulo 81, R.Oliveira 68, R.Prado 71">Danilo: 117. Paulo: 81. R.Oliveira: 68. R.Prado: 71.</canvas>
+        <div class="chart-wrap" style="height:220px">
+          <canvas id="c-perfilA" role="img" aria-label="Perfil A: Danilo 117, Paulo 81, R.Oliveira 68, R.Prado 71">Danilo:117. Paulo:81. R.Oliveira:68. R.Prado:71.</canvas>
         </div>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-header"><div class="card-title">Carteira detalhada por vendedor e perfil</div></div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Vendedor</th>
-            <th class="right">Perfil A</th>
-            <th class="right">Perfil B</th>
-            <th class="right">Perfil C</th>
-            <th class="right">Perfil D</th>
-            <th class="right">Total carteira</th>
-            <th class="right">Visitados</th>
-            <th class="right">% Cobertura</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+      <div class="card-header"><div class="card-title">Carteira detalhada</div></div>
+      <table class="tbl">
+        <thead><tr><th>Vendedor</th><th class="right">Perfil A</th><th class="right">Perfil B</th><th class="right">Perfil C</th><th class="right">Perfil D</th><th class="right">Total</th><th class="right">Visitados</th><th class="right">Cobertura</th><th>Status</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Danilo Marques</strong></td>
-            <td class="num">117</td><td class="num">76</td><td class="num">21</td><td class="num">24</td>
-            <td class="num"><strong>238</strong></td>
-            <td class="num">131</td>
-            <td class="num c-amber">55%</td>
-            <td><span class="badge b-amber">Parcial</span></td>
-          </tr>
-          <tr>
-            <td><strong>Paulo Pontelli</strong></td>
-            <td class="num">81</td><td class="num">26</td><td class="num">29</td><td class="num">42</td>
-            <td class="num"><strong>178</strong></td>
-            <td class="num">92</td>
-            <td class="num c-amber">52%</td>
-            <td><span class="badge b-amber">Parcial</span></td>
-          </tr>
-          <tr>
-            <td><strong>Ricardo Oliveira</strong></td>
-            <td class="num">68</td><td class="num">16</td><td class="num">17</td><td class="num">28</td>
-            <td class="num"><strong>129</strong></td>
-            <td class="num up-good">194</td>
-            <td class="num up-good">150%</td>
-            <td><span class="badge b-green">Excelente</span></td>
-          </tr>
-          <tr>
-            <td><strong>Ricardo Prado</strong></td>
-            <td class="num">71</td><td class="num">21</td><td class="num">24</td><td class="num">67</td>
-            <td class="num"><strong>183</strong></td>
-            <td class="num">25</td>
-            <td class="num c-blue">14%*</td>
-            <td><span class="badge b-blue">Integração</span></td>
-          </tr>
-          <tr style="background:var(--gray-l)">
-            <td><strong>TOTAL</strong></td>
-            <td class="num"><strong>337</strong></td><td class="num"><strong>139</strong></td><td class="num"><strong>91</strong></td><td class="num"><strong>161</strong></td>
-            <td class="num"><strong>728</strong></td>
-            <td class="num"><strong>442</strong></td>
-            <td class="num"><strong>61%</strong></td>
-            <td><span class="badge b-amber">Parcial</span></td>
-          </tr>
+          <tr><td><strong>Danilo Marques</strong></td><td class="num right">117</td><td class="num right">76</td><td class="num right">21</td><td class="num right">24</td><td class="num right"><strong>238</strong></td><td class="num right">131</td><td class="num right c-amber">55%</td><td><span class="badge b-amber">Parcial</span></td></tr>
+          <tr><td><strong>Paulo Pontelli</strong></td><td class="num right">81</td><td class="num right">26</td><td class="num right">29</td><td class="num right">42</td><td class="num right"><strong>178</strong></td><td class="num right">92</td><td class="num right c-amber">52%</td><td><span class="badge b-amber">Parcial</span></td></tr>
+          <tr><td><strong>Ricardo Oliveira</strong></td><td class="num right">68</td><td class="num right">16</td><td class="num right">17</td><td class="num right">28</td><td class="num right"><strong>129</strong></td><td class="num right c-green">194</td><td class="num right c-green">150%</td><td><span class="badge b-green">Excelente</span></td></tr>
+          <tr><td><strong>Ricardo Prado</strong></td><td class="num right">71</td><td class="num right">21</td><td class="num right">24</td><td class="num right">67</td><td class="num right"><strong>183</strong></td><td class="num right">25</td><td class="num right c-blue">14%*</td><td><span class="badge b-blue">Integração</span></td></tr>
+          <tr style="background:var(--gray-l)"><td><strong>TOTAL</strong></td><td class="num right"><strong>337</strong></td><td class="num right"><strong>139</strong></td><td class="num right"><strong>91</strong></td><td class="num right"><strong>161</strong></td><td class="num right"><strong>728</strong></td><td class="num right"><strong>442</strong></td><td class="num right"><strong>61%</strong></td><td><span class="badge b-amber">Parcial</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- ══ TAB: BUSCA ══ -->
-  <div id="tab-busca" class="section">
+  <!-- ══════════════════════════════════════════
+       BUSCA — CARTEIRA
+  ══════════════════════════════════════════ -->
+  <div id="tab-busca-carteira" class="section">
     <div class="filter-bar">
-      <button class="filter-btn active" onclick="filtroVend('todos',this)">Todos</button>
-      <button class="filter-btn" onclick="filtroVend('Danilo',this)">Danilo</button>
-      <button class="filter-btn" onclick="filtroVend('Paulo',this)">Paulo</button>
-      <button class="filter-btn" onclick="filtroVend('R. Oliveira',this)">R. Oliveira</button>
-      <button class="filter-btn" onclick="filtroVend('R. Prado',this)">R. Prado</button>
-      <select class="filter-select" id="filtro-perfil" onchange="renderTabela()">
+      <button class="fbtn active" onclick="filtroVend('todos',this)">Todos</button>
+      <button class="fbtn" onclick="filtroVend('Danilo',this)">Danilo</button>
+      <button class="fbtn" onclick="filtroVend('Paulo',this)">Paulo</button>
+      <button class="fbtn" onclick="filtroVend('R. Oliveira',this)">R. Oliveira</button>
+      <button class="fbtn" onclick="filtroVend('R. Prado',this)">R. Prado</button>
+      <select class="fselect" id="filtro-perfil" onchange="renderTabelaCarteira()">
         <option value="todos">Todos os perfis</option>
-        <option value="A">Perfil A</option>
-        <option value="B">Perfil B</option>
-        <option value="C">Perfil C</option>
-        <option value="D">Perfil D</option>
+        <option value="A">Perfil A</option><option value="B">Perfil B</option>
+        <option value="C">Perfil C</option><option value="D">Perfil D</option>
       </select>
-      <select class="filter-select" id="filtro-status" onchange="renderTabela()">
+      <select class="fselect" id="filtro-status" onchange="renderTabelaCarteira()">
         <option value="todos">Todos os status</option>
         <option value="destaque">Destaque</option>
         <option value="atencao">Atenção</option>
         <option value="integracao">Integração</option>
       </select>
-      <input class="search-input" type="text" id="busca-tabela" placeholder="Buscar..." oninput="renderTabela()" style="width:180px;margin-left:auto">
+      <input class="search-input" type="text" id="busca-carteira-input" placeholder="Buscar..." oninput="renderTabelaCarteira()" style="width:180px;margin-left:auto">
     </div>
-
-    <p class="search-count" id="search-count">Mostrando todos os registros</p>
-
-    <div class="search-results">
-      <table class="data-table" style="width:100%">
-        <thead>
-          <tr>
-            <th>Vendedor</th>
-            <th>Perfil</th>
-            <th class="right">Carteira</th>
-            <th class="right">Visitados</th>
-            <th class="right">Cobertura</th>
-            <th class="right">Visitas</th>
-            <th class="right">Vis/Sem</th>
-            <th class="right">Oport.</th>
-            <th class="right">Conv. vis→op</th>
-            <th class="right">Vendas</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-body"></tbody>
+    <p class="f-count" id="carteira-count" style="margin-bottom:.75rem"></p>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="tbl">
+        <thead><tr><th>Vendedor</th><th>Perfil</th><th class="right">Carteira</th><th class="right">Visitados</th><th class="right">Cobertura</th><th class="right">Visitas</th><th class="right">Vis/Sem</th><th class="right">Oport.</th><th class="right">Conv.</th><th class="right">Vendas</th><th>Status</th></tr></thead>
+        <tbody id="tabela-carteira-body"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ══ TAB: FUNIL ══ -->
-  <div id="tab-funil" class="section">
-    <div class="metrics-grid">
-      <div class="metric">
-        <div class="lbl">Carteira total</div>
-        <div class="val">728</div>
-        <div class="chg neutral">clientes cadastrados</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Visitados</div>
-        <div class="val c-amber">442</div>
-        <div class="chg neutral">61% da carteira</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Com oportunidade</div>
-        <div class="val c-blue">32</div>
-        <div class="chg neutral">3.6% dos visitados</div>
-      </div>
-      <div class="metric">
-        <div class="lbl">Convertidos</div>
-        <div class="val up-good">2</div>
-        <div class="chg neutral">6.3% das oportunidades</div>
-      </div>
+  <!-- ══════════════════════════════════════════
+       NEGOCIAÇÕES — VISÃO GERAL
+  ══════════════════════════════════════════ -->
+  <div id="tab-neg-visao" class="section">
+    <div class="metrics">
+      <div class="metric"><div class="lbl">Total negociações</div><div class="val">73</div><div class="sub">Em andamento</div></div>
+      <div class="metric"><div class="lbl">Pipeline total</div><div class="val c-green">R$ 122M</div><div class="sub">Valor dos produtos</div></div>
+      <div class="metric"><div class="lbl">Ticket médio</div><div class="val c-blue">R$ 1,67M</div><div class="sub">Por negociação</div></div>
+      <div class="metric"><div class="lbl">Maior grupo</div><div class="val c-red">Plantio</div><div class="sub">43 neg. · R$ 90,7M</div></div>
     </div>
-
     <div class="g2">
       <div class="card">
-        <div class="card-header"><div class="card-title">Funil completo — grupo</div></div>
-        <div class="chart-wrap" style="height:280px">
-          <canvas id="c-funil" role="img" aria-label="Funil: 728 carteira, 442 visitados, 32 oportunidades, 2 vendas">Carteira: 728. Visitados: 442. Oport.: 32. Vendas: 2.</canvas>
+        <div class="card-header"><div class="card-title">Negócios por grupo</div></div>
+        <div class="chart-wrap" style="height:220px">
+          <canvas id="c-neg-grupos" role="img" aria-label="Grupos: Plantio 43, Pulverização 7, Processador 7, Adubação 6, Manejo 5">Plantio:43. Pulverização:7. Processador:7. Adubação:6. Manejo:5.</canvas>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Conversão por vendedor</div></div>
-        <div class="chart-wrap" style="height:280px">
-          <canvas id="c-conv" role="img" aria-label="Taxa de conversão por vendedor: Paulo 7.2%, R.Oliveira 2%, Danilo 2%, R.Prado 7.1%">Paulo: 7.2%. R.Oliveira: 2%. Danilo: 2%. R.Prado: 7.1%.</canvas>
+        <div class="card-header"><div class="card-title">Top modelos negociados</div></div>
+        <div id="top-modelos-neg"></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Pipeline por grupo (R$)</div></div>
+        <div class="chart-wrap" style="height:200px">
+          <canvas id="c-neg-val" role="img" aria-label="Valor: Plantio 90,7M, Pulverização 17,5M, Adubação 5,7M">Plantio:90,7M. Pulverização:17,5M. Adubação:5,7M.</canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Probabilidade de fechamento</div></div>
+        <div class="chart-wrap" style="height:200px">
+          <canvas id="c-neg-prob" role="img" aria-label="Probabilidade: 1★ 23, 2★ 12, 3★ 14, 4★ 13, 5★ 11">1★:23. 2★:12. 3★:14. 4★:13. 5★:11.</canvas>
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- ══════════════════════════════════════════
+       NEGOCIAÇÕES — PRODUTOS
+  ══════════════════════════════════════════ -->
+  <div id="tab-neg-produtos" class="section">
+    <div class="filter-bar">
+      <button class="fbtn active" onclick="filtroGrupoNeg('todos',this)">Todos</button>
+      <button class="fbtn" onclick="filtroGrupoNeg('PLANTIO',this)">Plantio</button>
+      <button class="fbtn" onclick="filtroGrupoNeg('PULVERIZAÇÃO',this)">Pulverização</button>
+      <button class="fbtn" onclick="filtroGrupoNeg('PROCESSADOR DE PALHADA',this)">Processador</button>
+      <button class="fbtn" onclick="filtroGrupoNeg('ADUBAÇÃO',this)">Adubação</button>
+      <button class="fbtn" onclick="filtroGrupoNeg('MANEJO DE SOLO',this)">Manejo Solo</button>
+      <span class="f-count" id="prod-neg-count"></span>
+    </div>
+    <div class="card"><div class="card-header"><div class="card-title">Modelos em negociação</div></div><div id="prod-neg-bars"></div></div>
     <div class="card">
-      <div class="card-header"><div class="card-title">Análise de oportunidades — por vendedor</div></div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Vendedor</th>
-            <th class="right">Visitas</th>
-            <th class="right">Oportunidades</th>
-            <th class="right">Conv. vis→oport.</th>
-            <th class="right">Vendas</th>
-            <th class="right">Conv. oport.→venda</th>
-            <th class="right">Faturamento</th>
-            <th>Análise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Paulo Pontelli</strong></td>
-            <td class="num">250</td><td class="num">18</td>
-            <td class="num up-good">7.2%</td>
-            <td class="num up-good">2</td>
-            <td class="num up-good">11.1%</td>
-            <td class="num">R$ 505.000</td>
-            <td><span class="badge b-green">Melhor conversão</span></td>
-          </tr>
-          <tr>
-            <td><strong>Ricardo Oliveira</strong></td>
-            <td class="num">409</td><td class="num">8</td>
-            <td class="num c-amber">2.0%</td>
-            <td class="num neutral">0</td>
-            <td class="num neutral">—</td>
-            <td class="num neutral">—</td>
-            <td><span class="badge b-amber">Qualificar leads</span></td>
-          </tr>
-          <tr>
-            <td><strong>Danilo Marques</strong></td>
-            <td class="num">204</td><td class="num">4</td>
-            <td class="num dn-bad">2.0%</td>
-            <td class="num neutral">0</td>
-            <td class="num neutral">—</td>
-            <td class="num neutral">—</td>
-            <td><span class="badge b-red">Revisar abordagem</span></td>
-          </tr>
-          <tr>
-            <td><strong>Ricardo Prado *</strong></td>
-            <td class="num">28</td><td class="num">2</td>
-            <td class="num c-blue">7.1%</td>
-            <td class="num neutral">0</td>
-            <td class="num neutral">—</td>
-            <td class="num neutral">—</td>
-            <td><span class="badge b-blue">10 dias úteis</span></td>
-          </tr>
-          <tr style="background:var(--gray-l)">
-            <td><strong>Total</strong></td>
-            <td class="num"><strong>891</strong></td><td class="num"><strong>32</strong></td>
-            <td class="num"><strong>3.6%</strong></td>
-            <td class="num"><strong>2</strong></td>
-            <td class="num"><strong>6.3%</strong></td>
-            <td class="num"><strong>R$ 505.000</strong></td>
-            <td><span class="badge b-amber">Abaixo da meta</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="font-size:11px;color:var(--muted);margin-top:.75rem">* Ricardo Prado: dados de 10 dias úteis — não representativos do ritmo definitivo.</p>
+      <div class="card-header"><div class="card-title">Tabela por modelo</div></div>
+      <table class="tbl"><thead><tr><th>Grupo</th><th>Modelo</th><th class="right">Negócios</th><th class="right">Valor total</th><th class="right">Ticket médio</th></tr></thead>
+      <tbody id="prod-neg-tbl"></tbody></table>
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════
+       NEGOCIAÇÕES — FUNIL
+  ══════════════════════════════════════════ -->
+  <div id="tab-neg-funil" class="section">
+    <div class="metrics">
+      <div class="metric"><div class="lbl">Intenção compra</div><div class="val c-amber">52</div><div class="sub">R$ 81,3M</div></div>
+      <div class="metric"><div class="lbl">Em negociação</div><div class="val c-blue">8</div><div class="sub">R$ 15,3M</div></div>
+      <div class="metric"><div class="lbl">Bancos / Aprovações</div><div class="val c-red">7</div><div class="sub">R$ 10,1M</div></div>
+      <div class="metric"><div class="lbl">Aguard. Faturamento</div><div class="val c-green">1</div><div class="sub">R$ 2,3M</div></div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="card-header"><div class="card-title">Funil visual</div></div><div class="funil-wrap" id="funil-visual"></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Dias médios na etapa</div></div><div id="dias-etapa"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Etapas detalhadas</div></div>
+      <table class="tbl"><thead><tr><th>Funil</th><th>Etapa</th><th class="right">Qtd.</th><th class="right">Valor</th><th class="right">% pipeline</th></tr></thead>
+      <tbody id="funil-tbl"></tbody></table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       TODOS OS NEGÓCIOS
+  ══════════════════════════════════════════ -->
+  <div id="tab-neg-lista" class="section">
+    <div class="filter-bar">
+      <div class="search-wrap" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" type="text" id="neg-search" placeholder="Cliente, produto, vendedor..." oninput="renderNegocios()" style="width:230px">
+      </div>
+      <select class="fselect" id="f-grupo-neg" onchange="renderNegocios()">
+        <option value="">Todos os grupos</option>
+        <option>PLANTIO</option><option>PULVERIZAÇÃO</option>
+        <option>PROCESSADOR DE PALHADA</option><option>ADUBAÇÃO</option>
+        <option>MANEJO DE SOLO</option><option>IMPLEMENTOS</option><option>COLHEITA</option>
+      </select>
+      <select class="fselect" id="f-etapa-neg" onchange="renderNegocios()">
+        <option value="">Todas as etapas</option>
+        <option>1-Intenção de compra</option><option>2-Negociação</option>
+        <option>3-Avaliar Usados</option><option>4-Proposta ao cliente</option>
+        <option>7-Aprovar Pedido</option><option>11-Abrir Protocolo</option>
+        <option>12-Em Análise</option><option>18-Aguard. Faturamento</option>
+      </select>
+      <select class="fselect" id="f-vend-neg" onchange="renderNegocios()">
+        <option value="">Todos os vendedores</option>
+        <option>Ricardo Oliveira Alves</option>
+        <option>Paulo Pontelli</option>
+        <option>RICARDO NASCIMENTO DO PRADO</option>
+        <option>Danilo Marques</option>
+      </select>
+      <select class="fselect" id="f-prob-neg" onchange="renderNegocios()">
+        <option value="">Todas as probs.</option>
+        <option value="1">★</option><option value="2">★★</option>
+        <option value="3">★★★</option><option value="4">★★★★</option><option value="5">★★★★★</option>
+      </select>
+      <span class="f-count" id="neg-count"></span>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="tbl">
+        <thead><tr>
+          <th onclick="sortNeg('cliente')">Cliente</th>
+          <th onclick="sortNeg('grupo')">Grupo</th>
+          <th onclick="sortNeg('modelo')">Modelo</th>
+          <th onclick="sortNeg('etapa')">Etapa</th>
+          <th onclick="sortNeg('prob')">Prob.</th>
+          <th onclick="sortNeg('valor')" class="right">Valor</th>
+          <th onclick="sortNeg('dias')" class="right">Dias</th>
+          <th onclick="sortNeg('vendedor')">Vendedor</th>
+        </tr></thead>
+        <tbody id="neg-tbl"></tbody>
+      </table>
+    </div>
+  </div>
 </main>
 
 <script>
-const DADOS = [
-  {vendedor:'Danilo Marques',  perfil:'A',carteira:117,visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
-  {vendedor:'Danilo Marques',  perfil:'B',carteira:76, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
-  {vendedor:'Danilo Marques',  perfil:'C',carteira:21, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
-  {vendedor:'Danilo Marques',  perfil:'D',carteira:24, visitados:131,cobertura:55, visitas:204,visSem:9.6, oport:4, convVis:2.0, vendas:0, status:'atencao'},
-  {vendedor:'Paulo Pontelli',  perfil:'A',carteira:81, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
-  {vendedor:'Paulo Pontelli',  perfil:'B',carteira:26, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
-  {vendedor:'Paulo Pontelli',  perfil:'C',carteira:29, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
-  {vendedor:'Paulo Pontelli',  perfil:'D',carteira:42, visitados:92, cobertura:52, visitas:250,visSem:11.8,oport:18,convVis:7.2, vendas:2, status:'destaque'},
-  {vendedor:'R. Oliveira',     perfil:'A',carteira:68, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
-  {vendedor:'R. Oliveira',     perfil:'B',carteira:16, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
-  {vendedor:'R. Oliveira',     perfil:'C',carteira:17, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
-  {vendedor:'R. Oliveira',     perfil:'D',carteira:28, visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8, convVis:2.0, vendas:0, status:'destaque'},
-  {vendedor:'R. Prado',        perfil:'A',carteira:71, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
-  {vendedor:'R. Prado',        perfil:'B',carteira:21, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
-  {vendedor:'R. Prado',        perfil:'C',carteira:24, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
-  {vendedor:'R. Prado',        perfil:'D',carteira:67, visitados:25, cobertura:14, visitas:28, visSem:14.0,oport:2, convVis:7.1, vendas:0, status:'integracao'},
+// ═══════════════════════════════════════════════
+// DADOS — CARTEIRA
+// ═══════════════════════════════════════════════
+const CARTEIRA_DADOS=[
+  {vendedor:'Danilo Marques',perfil:'A',carteira:117,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'B',carteira:76,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'C',carteira:21,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'D',carteira:24,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
+  {vendedor:'Paulo Pontelli',perfil:'A',carteira:81,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'B',carteira:26,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'C',carteira:29,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'D',carteira:42,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'A',carteira:68,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'B',carteira:16,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'C',carteira:17,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'D',carteira:28,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
+  {vendedor:'R. Prado',perfil:'A',carteira:71,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'B',carteira:21,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'C',carteira:24,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'D',carteira:67,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
 ];
 
-let filtroAtualVend = 'todos';
+// ═══════════════════════════════════════════════
+// DADOS — NEGOCIAÇÕES
+// ═══════════════════════════════════════════════
+const NEGOCIOS=[
+  {cliente:'MAYKON TOMASI GIACOMINI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2100000,dias:1,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Conferir espaçamento de linha',prev:'07/07/2026'},
+  {cliente:'VALDECIR SOVERNIGO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2500000,dias:4,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'17/06/2026'},
+  {cliente:'DOMINGOS PASSINATO',grupo:'PULVERIZAÇÃO',modelo:'PULVEIRIZADOR LEEB 5.280 VL',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:4,valor:2650000,dias:253,vendedor:'RICARDO NASCIMENTO DO PRADO, Ricardo Oliveira Alves',cidade:'Mineiros/GO',obs:'',prev:'06/04/2026'},
+  {cliente:'NILTON MARCIO DE OLIVEIRA',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.45',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:2520000,dias:14,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Espaçamento 0,45',prev:'10/09/2026'},
+  {cliente:'NILTON MARCIO DE OLIVEIRA',grupo:'PLANTIO',modelo:'MAESTRO GV 36.50',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:2808000,dias:14,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Espaçamento 0,45',prev:'10/09/2026'},
+  {cliente:'NELVO FRIES',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 40.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2685050,dias:26,vendedor:'RICARDO NASCIMENTO DO PRADO',cidade:'Mineiros/GO',obs:'Maestro Evolution 40.45',prev:'31/08/2026'},
+  {cliente:'ELMIRO VIEIRA BORGES',grupo:'PLANTIO',modelo:'MAESTRO DUO 30.50',etapa:'2-Negociação',funil:'1. Vendas',prob:2,valor:2400000,dias:27,vendedor:'RICARDO NASCIMENTO DO PRADO',cidade:'Mineiros/GO',obs:'Maestro Duo 30 linhas',prev:'30/09/2026'},
+  {cliente:'FERNANDO INACIO CARDOSO',grupo:'MANEJO DE SOLO',modelo:'EVO TL 8 HASTES',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:570000,dias:20,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'Evo TL',prev:'01/01/2027'},
+  {cliente:'PATRICK JOSE HUDSON',grupo:'ADUBAÇÃO',modelo:'EVO 8 CS 15.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1650000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:'01/01/2027'},
+  {cliente:'MARISTELA STORTI RASTEIRO DE OLIVEIRA',grupo:'PLANTIO',modelo:'MAESTRO CF 18.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1500000,dias:20,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'Maestro CF Dakar',prev:'01/01/2027'},
+  {cliente:'JOSE LUIZ CADORE',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1500000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Plantadeira Maestro Evolution',prev:'01/01/2027'},
+  {cliente:'José palharini',grupo:'PULVERIZAÇÃO',modelo:'PULVERIZADOR JD 4025',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:600000,dias:19,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'JD4630 usado',prev:'30/06/2026'},
+  {cliente:'CLAUDIO AUGUSTO DINIZ',grupo:'IMPLEMENTOS',modelo:'VAGÃO FORRAGEIRO',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:400000,dias:19,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:'01/01/2027'},
+  {cliente:'CLAUDIO AUGUSTO DINIZ',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2370000,dias:19,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Maestro 24 linhas',prev:'01/01/2027'},
+  {cliente:'MARISTELA STORTI RASTEIRO DE OLIVEIRA',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:265000,dias:20,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'Cultro 9 Tc',prev:'01/01/2027'},
+  {cliente:'BRUNO VILELA',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:265000,dias:20,vendedor:'Paulo Pontelli',cidade:'Portelândia/GO',obs:'',prev:'01/09/2026'},
+  {cliente:'VALTER MIGUEL GIACOMINI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 40.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2140000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Maestro 40.45',prev:'01/01/2027'},
+  {cliente:'MARCOS NEIS',grupo:'PLANTIO',modelo:'MAESTRO GV 36.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2750000,dias:20,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'',prev:'01/01/2027'},
+  {cliente:'JOAO PAULO CAMOZZI',grupo:'MANEJO DE SOLO',modelo:'EVO TL 8 HASTES',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:575000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Evo TL 9.50',prev:'03/08/2026'},
+  {cliente:'ALCEU MORAES DE OLIVEIRA',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:265000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:'01/09/2026'},
+  {cliente:'RODRIGO LEITE MORAES',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'18-Aguard. Faturamento',funil:'3. Adm vendas',prob:5,valor:2310000,dias:25,vendedor:'Paulo Pontelli',cidade:'Itarumã/GO',obs:'Bonificação + Monitor EOST10',prev:'30/09/2026'},
+  {cliente:'LUIZ GUILHERME ALVES PEREIRA DA SILVA',grupo:'PLANTIO',modelo:'MAESTRO DUO 24.50',etapa:'12-Em Análise',funil:'4. Bancos',prob:5,valor:1800000,dias:25,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'Taxa Flat R$45k em 30/08/2026',prev:'31/08/2026'},
+  {cliente:'LUIZ GUILHERME ALVES PEREIRA DA SILVA',grupo:'PLANTIO',modelo:'MAESTRO CF 18.50',etapa:'12-Em Análise',funil:'4. Bancos',prob:5,valor:1290000,dias:25,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'31/08/2026'},
+  {cliente:'EMÍLIO CARVALHO GARCIA',grupo:'PULVERIZAÇÃO',modelo:'PULVEIRIZADOR LEEB 5.280 VL',etapa:'11-Abrir Protocolo',funil:'4. Bancos',prob:5,valor:2500000,dias:25,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'R$1,95M Consórcio CAIXA',prev:'05/05/2026'},
+  {cliente:'GIOVANI BARUFFi',grupo:'PLANTIO',modelo:'MAESTRO DUO 24.50',etapa:'11-Abrir Protocolo',funil:'4. Bancos',prob:5,valor:1690000,dias:25,vendedor:'RICARDO NASCIMENTO DO PRADO, Ricardo Oliveira Alves',cidade:'Mineiros/GO',obs:'',prev:'02/04/2026'},
+  {cliente:'LUIZ GUILHERME ALVES PEREIRA DA SILVA',grupo:'APLICADORES DE SULCO',modelo:'HUNTER H900',etapa:'12-Em Análise',funil:'4. Bancos',prob:5,valor:125000,dias:25,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'13/05/2026'},
+  {cliente:'ONILDO SCOPEL',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:1500000,dias:27,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'05/04/2027'},
+  {cliente:'ACHILES LESSA',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'2-Negociação',funil:'1. Vendas',prob:5,valor:260000,dias:50,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'30/04/2026'},
+  {cliente:'ARCIR LUIZ FERRARI',grupo:'COLHEITA',modelo:'GRAIN MAX 25000',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:320000,dias:54,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'Carreta Graneleira',prev:'20/05/2026'},
+  {cliente:'RENATO BONZANINI',grupo:'PULVERIZAÇÃO',modelo:'PULVEIRIZADOR LEEB 5.280 VL',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2800000,dias:329,vendedor:'Danilo Marques',cidade:'Perolândia/GO',obs:'',prev:'28/05/2026'},
+  {cliente:'ADROALDO GORGEM',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'4-Proposta ao cliente',funil:'1. Vendas',prob:4,valor:2350000,dias:53,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'08/04/2026'},
+  {cliente:'CELSO LUIS PREVIATTI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1600000,dias:329,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'25/06/2026'},
+  {cliente:'RONALDO PERES CARVALHO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2136000,dias:329,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'24/09/2025'},
+  {cliente:'JOEL RAGAGNIN',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2300000,dias:288,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'Rolo faca e plantadeira',prev:'19/06/2026'},
+  {cliente:'OSMAR RAGAGNIN',grupo:'IMPLEMENTOS',modelo:'LEEB 6.280',etapa:'7-Aprovar Pedido',funil:'2. Aprovações',prob:5,valor:2702035,dias:293,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'LEEB 6.280 36 MTS',prev:''},
+  {cliente:'DANIEL CARVALHO DE OLIVEIRA',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'2-Negociação',funil:'1. Vendas',prob:1,valor:1759000,dias:77,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'24/10/2025'},
+  {cliente:'RICARDO DUARTE PRADO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1800000,dias:286,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'08/05/2026'},
+  {cliente:'Valmir Ferarri',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1600000,dias:63,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'18/09/2026'},
+  {cliente:'Laurindo Aimi',grupo:'PLANTIO',modelo:'MAESTRO DUO 36.50',etapa:'2-Negociação',funil:'1. Vendas',prob:1,valor:2450000,dias:199,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:'18/06/2026'},
+  {cliente:'JOAO PAULO CAMOZZI',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:280000,dias:64,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:''},
+  {cliente:'ARCIR LUIZ FERRARI',grupo:'MANEJO DE SOLO',modelo:'EVO TL 8 HASTES',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:430000,dias:78,vendedor:'Douglas Kirch de Oliveira (Inativo)',cidade:'Jataí/GO',obs:'',prev:'17/06/2026'},
+  {cliente:'FRANCISCO ANTONIO DE MORAES LIMA',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'3-Avaliar Usados',funil:'1. Vendas',prob:3,valor:1776000,dias:98,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'06/02/2026'},
+  {cliente:'Cássio Zanuzzi',grupo:'PULVERIZAÇÃO',modelo:'PULVEIRIZADOR LEEB 5.280 VL',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2900000,dias:105,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'',prev:'15/07/2026'},
+  {cliente:'Marcos Paulo',grupo:'PLANTIO',modelo:'MACANUDA 28x45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:330000,dias:113,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Vence tudo',prev:'31/05/2026'},
+  {cliente:'MAGNOS RODRIGO DA COSTA WITTE',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:2100000,dias:127,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'Demo 30.50',prev:'11/04/2026'},
+  {cliente:'ALVARO STERCHILE',grupo:'PROCESSADOR DE PALHADA',modelo:'CULTRO 9 TC',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:320000,dias:131,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'10/06/2026'},
+  {cliente:'ANTONIO DE PADUA CARVALHO',grupo:'PULVERIZAÇÃO',modelo:'LEEB 6.280',etapa:'3-Avaliar Usados',funil:'1. Vendas',prob:4,valor:3500000,dias:134,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'LEEB 6.280 vl',prev:'06/04/2026'},
+  {cliente:'CLAUDIO JOAO GORGEN',grupo:'PLANTIO',modelo:'MAESTRO DUO 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:4,valor:2280000,dias:134,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'01/04/2026'},
+  {cliente:'RICARDO DUARTE PRADO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 40.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2800000,dias:329,vendedor:'Douglas Kirch de Oliveira (Inativo)',cidade:'Jataí/GO',obs:'',prev:'29/05/2026'},
+  {cliente:'SANDOVAL BAILAO FONSECA FILHO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'4-Proposta ao cliente',funil:'1. Vendas',prob:3,valor:5460000,dias:147,vendedor:'Paulo Pontelli',cidade:'Rio Verde/GO',obs:'Duas Maestro 30 linhas',prev:'13/01/2026'},
+  {cliente:'JOSE HERMINIO CALEFFI MAGRO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'4-Proposta ao cliente',funil:'1. Vendas',prob:4,valor:2664000,dias:152,vendedor:'RICARDO NASCIMENTO DO PRADO, Ricardo Oliveira Alves',cidade:'Caiapônia/GO',obs:'',prev:'05/01/2026'},
+  {cliente:'Fagner de Moura Costa',grupo:'PLANTIO',modelo:'MAESTRO DUO 24.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:1600000,dias:161,vendedor:'Paulo Pontelli',cidade:'Serranópolis/GO',obs:'',prev:'12/06/2026'},
+  {cliente:'VOLNEI ZOBOLI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:2800000,dias:162,vendedor:'Paulo Pontelli',cidade:'Itarumã/GO',obs:'',prev:'15/05/2026'},
+  {cliente:'VOLNEI ZOBOLI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:1600000,dias:162,vendedor:'Paulo Pontelli',cidade:'Itarumã/GO',obs:'',prev:'15/05/2026'},
+  {cliente:'Cláudio Lázaro Prado',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2800000,dias:253,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'FCO',prev:'30/12/2025'},
+  {cliente:'JOSIAS CARVALHO NETO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.45',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2250000,dias:279,vendedor:'Ricardo Oliveira Alves',cidade:'Perolândia/GO',obs:'',prev:'31/08/2026'},
+  {cliente:'ANTONIO EMILIANO DI CARVALHO GEDDA',grupo:'PLANTIO',modelo:'MAESTRO CF 18.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:1260000,dias:279,vendedor:'Ricardo Oliveira Alves',cidade:'Cachoeira Alta/GO',obs:'',prev:'31/08/2026'},
+  {cliente:'RICARDO REBELATTO MUNIZ',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:2800000,dias:197,vendedor:'Ricardo Oliveira Alves',cidade:'Doverlândia/GO',obs:'',prev:'04/11/2025'},
+  {cliente:'ANTONIO JOSE GAZARINI',grupo:'ADUBAÇÃO',modelo:'EVO 8 CS 15.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:1600000,dias:197,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:'11/04/2026'},
+  {cliente:'VOLMIR ANTONIO MAGGIONI',grupo:'MANEJO DE SOLO',modelo:'EVO TL 8 HASTES',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:3,valor:460000,dias:199,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'30/09/2025'},
+  {cliente:'ELTON SANDRI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 24.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:4,valor:1872000,dias:152,vendedor:'Ricardo Oliveira Alves',cidade:'Mineiros/GO',obs:'',prev:'01/01/2026'},
+  {cliente:'ADROALDO GORGEM',grupo:'ADUBAÇÃO',modelo:'EVO 8 CS 15.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:4,valor:1470300,dias:53,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'08/04/2026'},
+  {cliente:'LUIZ GUILHERME ALVES PEREIRA DA SILVA',grupo:'ADUBAÇÃO',modelo:'EVO 8 CS 15.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:5,valor:1373000,dias:20,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:''},
+  {cliente:'JOAO PAULO CAMOZZI',grupo:'ADUBAÇÃO',modelo:'EVO 8 CS 15.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:1230000,dias:20,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'',prev:''},
+  {cliente:'ARCIR LUIZ FERRARI',grupo:'COLHEITA',modelo:'GRAIN MAX 25000',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:285000,dias:54,vendedor:'Danilo Marques',cidade:'Jataí/GO',obs:'',prev:''},
+];
 
-function goTab(id, el) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  if (el) el.classList.add('active');
-  const titles = {
-    'visao-geral': ['Visão geral','Desempenho comercial da equipe de Jataí — Jan a Mai 2026'],
-    'vendedores':  ['Vendedores','Perfil detalhado de cada vendedor'],
-    'carteira':    ['Carteira','Distribuição de clientes por perfil e vendedor'],
-    'busca':       ['Busca & filtros','Pesquise e filtre por vendedor, perfil e status'],
-    'funil':       ['Funil & conversão','Taxa de conversão — visita → oportunidade → venda'],
-  };
-  if (titles[id]) {
-    document.getElementById('page-title').textContent = titles[id][0];
-    document.getElementById('page-sub').textContent   = titles[id][1];
-  }
-  if (id === 'busca') renderTabela();
-}
+// ── HELPERS ───────────────────────────────────────────────────────
+function fmt(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0})}
+function fmtM(v){return'R$ '+(v/1000000).toFixed(1)+'M'}
+function probColor(n){return n>=4?'#3B6D11':n>=3?'#854F0B':'#888780'}
 
-function filtroVend(v, btn) {
-  filtroAtualVend = v;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  renderTabela();
-}
-
-function filtrarVendedor(v) {
-  filtroAtualVend = v;
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === v || (v === 'todos' && b.textContent.trim() === 'Todos'));
-  });
-  renderTabela();
-}
-
-function renderTabela() {
-  const busca   = (document.getElementById('busca-tabela')?.value || '').toLowerCase();
-  const perfil  = document.getElementById('filtro-perfil')?.value  || 'todos';
-  const status  = document.getElementById('filtro-status')?.value  || 'todos';
-
-  let dados = DADOS.filter(d => {
-    if (filtroAtualVend !== 'todos' && !d.vendedor.toLowerCase().includes(filtroAtualVend.toLowerCase())) return false;
-    if (perfil !== 'todos' && d.perfil !== perfil) return false;
-    if (status !== 'todos' && d.status !== status) return false;
-    if (busca && !d.vendedor.toLowerCase().includes(busca) && !d.perfil.toLowerCase().includes(busca)) return false;
-    return true;
-  });
-
-  const count = document.getElementById('search-count');
-  count.textContent = `Mostrando ${dados.length} registro${dados.length !== 1 ? 's' : ''}`;
-
-  const statusMap = {
-    destaque:   ['b-green','Destaque'],
-    atencao:    ['b-amber','Atenção'],
-    integracao: ['b-blue','Integração'],
-  };
-
-  const tbody = document.getElementById('tabela-body');
-  if (!dados.length) {
-    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center;padding:2rem;color:var(--muted)">Nenhum resultado encontrado</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = dados.map(d => {
-    const [bc, bl] = statusMap[d.status] || ['b-gray','—'];
-    const covColor = d.cobertura >= 100 ? 'up-good' : d.cobertura >= 50 ? 'c-amber' : 'c-blue';
-    const convColor = d.convVis >= 5 ? 'up-good' : d.convVis >= 3 ? 'c-amber' : 'dn-bad';
-    return `<tr>
-      <td><strong>${d.vendedor}</strong></td>
-      <td><span class="badge b-gray">Perfil ${d.perfil}</span></td>
-      <td class="num">${d.carteira}</td>
-      <td class="num">${d.visitados}</td>
-      <td class="num ${covColor}">${d.cobertura}%</td>
-      <td class="num">${d.visitas}</td>
-      <td class="num">${d.visSem.toFixed(1)}</td>
-      <td class="num">${d.oport}</td>
-      <td class="num ${convColor}">${d.convVis.toFixed(1)}%</td>
-      <td class="num ${d.vendas > 0 ? 'up-good' : 'neutral'}">${d.vendas}</td>
-      <td><span class="badge ${bc}">${bl}</span></td>
-    </tr>`;
-  }).join('');
-}
-
-function globalSearch(val) {
-  const v = val.toLowerCase().trim();
-  if (!v) return;
-  goTab('busca', document.querySelector('.nav-item:nth-child(5)'));
-  document.getElementById('busca-tabela').value = val;
-  renderTabela();
-}
-
-Chart.defaults.font.family = "'DM Sans', sans-serif";
-Chart.defaults.font.size   = 11;
-const txt  = '#6B6B6B';
-const grid = 'rgba(0,0,0,0.05)';
-const scaleOpts = {
-  x: { ticks:{color:txt}, grid:{display:false}, border:{display:false} },
-  y: { ticks:{color:txt}, grid:{color:grid},    border:{display:false}, beginAtZero:true }
+// ── NAVIGATION ────────────────────────────────────────────────────
+const PAGE_TITLES={
+  home:['Resumo geral','Visão consolidada — equipe comercial e pipeline de negociações'],
+  vendedores:['Vendedores','Perfil detalhado de cada vendedor'],
+  carteira:['Carteira de clientes','Distribuição por perfil e vendedor'],
+  'busca-carteira':['Busca — carteira','Pesquise e filtre por vendedor, perfil e status'],
+  'neg-visao':['Pipeline de negociações','Visão geral das negociações ativas — RIVEMA Jataí 2026'],
+  'neg-produtos':['Produtos — negociações','Negócios por grupo e modelo de produto'],
+  'neg-funil':['Funil & etapas','Distribuição de negócios por etapa do funil'],
+  'neg-lista':['Todos os negócios','Lista completa com busca e filtros avançados'],
 };
 
-new Chart(document.getElementById('c-visitas'), {
-  type:'bar',
-  data:{
-    labels:['Danilo','Paulo','R. Oliveira','R. Prado*'],
-    datasets:[{data:[204,250,409,28],backgroundColor:['#EF9F27','#4CAF76','#639922','#378ADD'],borderWidth:0}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+function goTab(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+  const t=PAGE_TITLES[id];
+  if(t){document.getElementById('page-title').textContent=t[0];document.getElementById('page-sub').textContent=t[1]}
+  if(id==='busca-carteira')renderTabelaCarteira();
+  if(id==='neg-produtos')renderProdutosNeg();
+  if(id==='neg-funil')renderFunil();
+  if(id==='neg-lista')renderNegocios();
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────
+function openModal(n){
+  document.getElementById('modal-title').textContent=n.cliente;
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-section">Produto</div>
+    <div class="modal-field"><span class="modal-field-label">Grupo</span><span class="modal-field-value">${n.grupo}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Modelo</span><span class="modal-field-value">${n.modelo}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Valor</span><span class="modal-field-value">${fmt(n.valor)}</span></div>
+    <div class="modal-section">Negociação</div>
+    <div class="modal-field"><span class="modal-field-label">Etapa</span><span class="modal-field-value">${n.etapa}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Funil</span><span class="modal-field-value">${n.funil}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Probabilidade</span><span class="modal-field-value" style="color:${probColor(n.prob)}">${'★'.repeat(n.prob)+'☆'.repeat(5-n.prob)}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Dias na etapa</span><span class="modal-field-value">${n.dias}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Previsão compra</span><span class="modal-field-value">${n.prev||'—'}</span></div>
+    <div class="modal-section">Cliente</div>
+    <div class="modal-field"><span class="modal-field-label">Cidade</span><span class="modal-field-value">${n.cidade}</span></div>
+    <div class="modal-field"><span class="modal-field-label">Vendedor</span><span class="modal-field-value">${n.vendedor}</span></div>
+    ${n.obs?`<div class="modal-section">Observações</div><div style="font-size:13px;color:var(--muted);line-height:1.6;padding:.25rem 0">${n.obs}</div>`:''}
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()})
+
+// ── CHARTS ────────────────────────────────────────────────────────
+Chart.defaults.font.family="'DM Sans',sans-serif";
+Chart.defaults.font.size=11;
+const txt='#6B6B6B',grid='rgba(0,0,0,0.05)';
+const sx={ticks:{color:txt},grid:{display:false},border:{display:false}};
+const sy={ticks:{color:txt},grid:{color:grid},border:{display:false},beginAtZero:true};
+
+new Chart(document.getElementById('c-home-grupos'),{type:'doughnut',
+  data:{labels:['Plantio','Pulverização','Adubação','Implementos','Proc.Palhada','Manejo Solo','Colheita','Aplic.Sulco'],
+    datasets:[{data:[90688050,17550000,5743300,3102035,1955000,2315000,605000,125000],
+      backgroundColor:['#C0131A','#378ADD','#4CAF76','#D85A30','#EF9F27','#7F77DD','#1D9E75','#888780'],borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'right',labels:{padding:8,font:{size:10},color:txt}},
+      tooltip:{callbacks:{label:ctx=>fmtM(ctx.parsed)}}}}
 });
 
-new Chart(document.getElementById('c-comparativo'), {
-  type:'bar',
-  data:{
-    labels:['Danilo','Paulo','R. Oliveira','R. Prado'],
-    datasets:[
-      {label:'Carteira total',     data:[238,178,129,183],backgroundColor:'#D3D1C7',borderWidth:0},
-      {label:'Clientes visitados', data:[131, 92,194, 25],backgroundColor:'#EF9F27',borderWidth:0},
-      {label:'Oportunidades',      data:[  4, 18,  8,  2],backgroundColor:'#378ADD',borderWidth:0},
-      {label:'Vendas',             data:[  0,  2,  0,  0],backgroundColor:'#C0131A',borderWidth:0},
-    ]
-  },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+new Chart(document.getElementById('c-vend-vis'),{type:'bar',
+  data:{labels:['Danilo','Paulo','R.Oliveira','R.Prado'],
+    datasets:[{data:[204,250,409,28],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
-new Chart(document.getElementById('c-perfil'), {
-  type:'doughnut',
-  data:{
-    labels:['Perfil A (>1.001ha)','Perfil B (501–1.000ha)','Perfil C (201–500ha)','Perfil D (1–200ha)'],
-    datasets:[{data:[337,139,91,161],backgroundColor:['#C0131A','#EF9F27','#378ADD','#D3D1C7'],borderWidth:2,borderColor:'#fff'}]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{
-      legend:{position:'bottom',labels:{padding:12,font:{size:11},color:txt}},
-      tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed} clientes`}}
-    }
-  }
+new Chart(document.getElementById('c-perfil'),{type:'doughnut',
+  data:{labels:['A (>1.001ha)','B (501-1.000ha)','C (201-500ha)','D (1-200ha)'],
+    datasets:[{data:[337,139,91,161],backgroundColor:['#C0131A','#EF9F27','#378ADD','#D3D1C7'],borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:10},color:txt}}}}
 });
 
-new Chart(document.getElementById('c-perfilA'), {
-  type:'bar',
-  data:{
-    labels:['Danilo','Paulo','R. Oliveira','R. Prado'],
-    datasets:[{label:'Perfil A',data:[117,81,68,71],backgroundColor:['#EF9F27','#4CAF76','#639922','#378ADD'],borderWidth:0}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+new Chart(document.getElementById('c-perfilA'),{type:'bar',
+  data:{labels:['Danilo','Paulo','R.Oliveira','R.Prado'],
+    datasets:[{data:[117,81,68,71],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
-new Chart(document.getElementById('c-funil'), {
-  type:'bar',
-  data:{
-    labels:['Carteira','Visitados','Oportunidades','Vendas'],
-    datasets:[{data:[728,442,32,2],backgroundColor:['#D3D1C7','#EF9F27','#378ADD','#4CAF76'],borderWidth:0}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:scaleOpts}
+new Chart(document.getElementById('c-neg-grupos'),{type:'bar',
+  data:{labels:['Plantio','Pulverização','Proc.Palhada','Adubação','Manejo Solo','Implementos','Colheita'],
+    datasets:[{data:[43,7,7,6,5,2,2],backgroundColor:['#C0131A','#378ADD','#EF9F27','#4CAF76','#7F77DD','#D85A30','#1D9E75'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
-new Chart(document.getElementById('c-conv'), {
-  type:'bar',
-  data:{
-    labels:['Paulo','R. Prado*','R. Oliveira','Danilo'],
-    datasets:[{data:[7.2,7.1,2.0,2.0],backgroundColor:['#4CAF76','#378ADD','#EF9F27','#E24B4A'],borderWidth:0}]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`Conv: ${ctx.parsed.y.toFixed(1)}%`}}},
-    scales:{
-      x:{ticks:{color:txt},grid:{display:false},border:{display:false}},
-      y:{ticks:{color:txt,callback:v=>v+'%'},grid:{color:grid},border:{display:false},beginAtZero:true}
-    }
-  }
+new Chart(document.getElementById('c-neg-val'),{type:'bar',
+  data:{labels:['Plantio','Pulverização','Adubação','Manejo','Implementos','Processador','Colheita'],
+    datasets:[{data:[90688050,17550000,5743300,2315000,3102035,1955000,605000],
+      backgroundColor:['#C0131A','#378ADD','#4CAF76','#7F77DD','#D85A30','#EF9F27','#1D9E75'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:ctx=>fmtM(ctx.parsed.y)}}},scales:{x:sx,y:{...sy,ticks:{color:txt,callback:v=>fmtM(v)}}}}
 });
 
-renderTabela();
+new Chart(document.getElementById('c-neg-prob'),{type:'bar',
+  data:{labels:['★','★★','★★★','★★★★','★★★★★'],
+    datasets:[{data:[23,12,14,13,11],backgroundColor:['#D3D1C7','#B4B2A9','#EF9F27','#639922','#1A5E38'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
+});
+
+// top modelos
+const topModelos=[
+  {m:'MAESTRO EVOLUTION 24.50',q:11,v:19249000},{m:'MAESTRO EVOLUTION 30.50',q:6,v:14166000},
+  {m:'CULTRO 9 TC',q:6,v:1655000},{m:'MAESTRO EVOLUTION 36.50',q:5,v:12624000},
+  {m:'PULVEIRIZADOR LEEB 5.280 VL',q:5,v:13450000},{m:'EVO 8 CS 15.50',q:5,v:5720000},
+  {m:'MAESTRO EVOLUTION 40.45',q:4,v:10745050},{m:'EVO TL 8 HASTES',q:4,v:2035000},
+];
+document.getElementById('top-modelos-neg').innerHTML=topModelos.map(d=>`
+  <div class="hbar-row">
+    <div class="hbar-label" title="${d.m}">${d.m}</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:${Math.round(d.q/11*100)}%;background:#C0131A"></div></div>
+    <div class="hbar-val">${d.q} · ${fmtM(d.v)}</div>
+  </div>`).join('');
+
+// pipeline por vendedor
+const vendPipeline=[
+  {v:'R. Oliveira Alves',val:55386300},{v:'Paulo Pontelli',val:35700000},
+  {v:'R. Prado',val:25899050},{v:'Danilo Marques',val:22682035},
+];
+const maxVP=55386300;
+const VCORS=['#C0131A','#4CAF76','#378ADD','#EF9F27'];
+document.getElementById('vend-pipeline-bars').innerHTML=vendPipeline.map((d,i)=>`
+  <div class="hbar-row">
+    <div class="hbar-label">${d.v}</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:${Math.round(d.val/maxVP*100)}%;background:${VCORS[i]}"></div></div>
+    <div class="hbar-val">${fmtM(d.val)}</div>
+  </div>`).join('');
+
+// ── BUSCA CARTEIRA ────────────────────────────────────────────────
+let filtroVendAtual='todos';
+function filtroVend(v,btn){
+  filtroVendAtual=v;
+  document.querySelectorAll('#tab-busca-carteira .fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTabelaCarteira();
+}
+function renderTabelaCarteira(){
+  const busca=(document.getElementById('busca-carteira-input')?.value||'').toLowerCase();
+  const perfil=document.getElementById('filtro-perfil')?.value||'todos';
+  const status=document.getElementById('filtro-status')?.value||'todos';
+  const stMap={destaque:['b-green','Destaque'],atencao:['b-amber','Atenção'],integracao:['b-blue','Integração']};
+  let d=CARTEIRA_DADOS.filter(r=>{
+    if(filtroVendAtual!=='todos'&&!r.vendedor.toLowerCase().includes(filtroVendAtual.toLowerCase()))return false;
+    if(perfil!=='todos'&&r.perfil!==perfil)return false;
+    if(status!=='todos'&&r.status!==status)return false;
+    if(busca&&!r.vendedor.toLowerCase().includes(busca)&&!r.perfil.toLowerCase().includes(busca))return false;
+    return true;
+  });
+  document.getElementById('carteira-count').textContent=d.length+' registros';
+  const cc=r=>r.cobertura>=100?'c-green':r.cobertura>=50?'c-amber':'c-blue';
+  const cv=r=>r.convVis>=5?'c-green':r.convVis>=3?'c-amber':'c-red';
+  document.getElementById('tabela-carteira-body').innerHTML=d.length?d.map(r=>{
+    const[bc,bl]=stMap[r.status]||['b-gray','—'];
+    return`<tr>
+      <td><strong>${r.vendedor}</strong></td>
+      <td><span class="badge b-gray">Perfil ${r.perfil}</span></td>
+      <td class="right mono">${r.carteira}</td><td class="right mono">${r.visitados}</td>
+      <td class="right mono ${cc(r)}">${r.cobertura}%</td>
+      <td class="right mono">${r.visitas}</td><td class="right mono">${r.visSem.toFixed(1)}</td>
+      <td class="right mono">${r.oport}</td>
+      <td class="right mono ${cv(r)}">${r.convVis.toFixed(1)}%</td>
+      <td class="right mono ${r.vendas>0?'c-green':''}">${r.vendas}</td>
+      <td><span class="badge ${bc}">${bl}</span></td>
+    </tr>`;}).join('')
+  :'<tr><td colspan="11" style="text-align:center;padding:2rem;color:var(--muted)">Nenhum resultado</td></tr>';
+}
+
+// ── PRODUTOS NEGOCIAÇÕES ──────────────────────────────────────────
+let filtroGrupoAtual='todos';
+function filtroGrupoNeg(g,btn){
+  filtroGrupoAtual=g;
+  document.querySelectorAll('#tab-neg-produtos .fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProdutosNeg();
+}
+function renderProdutosNeg(){
+  const map={};
+  NEGOCIOS.forEach(n=>{
+    if(filtroGrupoAtual!=='todos'&&n.grupo!==filtroGrupoAtual)return;
+    const k=n.grupo+'|'+n.modelo;
+    if(!map[k])map[k]={grupo:n.grupo,modelo:n.modelo,qtd:0,valor:0};
+    map[k].qtd++;map[k].valor+=n.valor;
+  });
+  const arr=Object.values(map).sort((a,b)=>b.qtd-a.qtd);
+  document.getElementById('prod-neg-count').textContent=arr.length+' modelos';
+  const mq=arr[0]?.qtd||1;
+  document.getElementById('prod-neg-bars').innerHTML=arr.map(d=>`
+    <div class="hbar-row">
+      <div class="hbar-label" title="${d.modelo}">${d.modelo}</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width:${Math.round(d.qtd/mq*100)}%;background:#C0131A"></div></div>
+      <div class="hbar-val">${d.qtd} · ${fmtM(d.valor)}</div>
+    </div>`).join('');
+  document.getElementById('prod-neg-tbl').innerHTML=arr.map(d=>`<tr>
+    <td><span class="badge b-gray">${d.grupo}</span></td>
+    <td>${d.modelo}</td>
+    <td class="right mono">${d.qtd}</td>
+    <td class="right mono">${fmt(d.valor)}</td>
+    <td class="right mono">${fmt(Math.round(d.valor/d.qtd))}</td>
+  </tr>`).join('');
+}
+
+// ── FUNIL ─────────────────────────────────────────────────────────
+function renderFunil(){
+  const etapas={};
+  NEGOCIOS.forEach(n=>{
+    if(!etapas[n.etapa])etapas[n.etapa]={funil:n.funil,qtd:0,valor:0,dias:[]};
+    etapas[n.etapa].qtd++;etapas[n.etapa].valor+=n.valor;etapas[n.etapa].dias.push(n.dias);
+  });
+  const arr=Object.entries(etapas).sort((a,b)=>b[1].qtd-a[1].qtd);
+  const mq=arr[0]?.[1]?.qtd||1;
+  const total=122083385;
+  const COLS=['#C0131A','#E24B4A','#EF9F27','#BA7517','#378ADD','#185FA5','#4CAF76','#1A5E38'];
+  document.getElementById('funil-visual').innerHTML=arr.map(([e,d],i)=>`
+    <div class="funil-step">
+      <div class="funil-label">${e}</div>
+      <div class="funil-bar-outer">
+        <div class="funil-bar-inner" style="width:${Math.max(Math.round(d.qtd/mq*100),8)}%;background:${COLS[i%COLS.length]}">
+          ${d.qtd} neg.
+        </div>
+      </div>
+      <div class="funil-val">${fmtM(d.valor)}</div>
+    </div>`).join('');
+  document.getElementById('dias-etapa').innerHTML=arr.map(([e,d])=>{
+    const med=Math.round(d.dias.reduce((a,b)=>a+b,0)/d.dias.length);
+    const w=Math.min(Math.round(med/330*100),100);
+    const c=med>200?'#C0131A':med>100?'#EF9F27':'#4CAF76';
+    return`<div class="hbar-row">
+      <div class="hbar-label" title="${e}">${e}</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width:${w}%;background:${c}"></div></div>
+      <div class="hbar-val">${med} dias</div>
+    </div>`;}).join('');
+  document.getElementById('funil-tbl').innerHTML=arr.map(([e,d])=>`<tr>
+    <td><span class="badge b-gray">${d.funil}</span></td>
+    <td>${e}</td>
+    <td class="right mono">${d.qtd}</td>
+    <td class="right mono">${fmt(d.valor)}</td>
+    <td class="right mono">${(d.valor/total*100).toFixed(1)}%</td>
+  </tr>`).join('');
+}
+
+// ── TODOS OS NEGÓCIOS ─────────────────────────────────────────────
+let negSortCol='valor',negSortAsc=false;
+function sortNeg(col){
+  if(negSortCol===col)negSortAsc=!negSortAsc;
+  else{negSortCol=col;negSortAsc=false}
+  renderNegocios();
+}
+function renderNegocios(){
+  const q=(document.getElementById('neg-search')?.value||'').toLowerCase();
+  const fg=document.getElementById('f-grupo-neg')?.value||'';
+  const fe=document.getElementById('f-etapa-neg')?.value||'';
+  const fv=document.getElementById('f-vend-neg')?.value||'';
+  const fp=document.getElementById('f-prob-neg')?.value||'';
+  let arr=NEGOCIOS.filter(n=>{
+    if(q&&!n.cliente.toLowerCase().includes(q)&&!n.modelo.toLowerCase().includes(q)&&!n.vendedor.toLowerCase().includes(q))return false;
+    if(fg&&n.grupo!==fg)return false;
+    if(fe&&n.etapa!==fe)return false;
+    if(fv&&!n.vendedor.includes(fv))return false;
+    if(fp&&n.prob!==parseInt(fp))return false;
+    return true;
+  });
+  arr.sort((a,b)=>{
+    let va=a[negSortCol],vb=b[negSortCol];
+    if(typeof va==='string'){va=va.toLowerCase();vb=vb.toLowerCase()}
+    return negSortAsc?(va>vb?1:-1):(va<vb?1:-1);
+  });
+  document.getElementById('neg-count').textContent=arr.length+' / '+NEGOCIOS.length+' negócios';
+  const EB={'1-Intenção de compra':'b-gray','2-Negociação':'b-amber','3-Avaliar Usados':'b-amber',
+    '4-Proposta ao cliente':'b-blue','7-Aprovar Pedido':'b-blue','11-Abrir Protocolo':'b-purple',
+    '12-Em Análise':'b-purple','18-Aguard. Faturamento':'b-green'};
+  document.getElementById('neg-tbl').innerHTML=arr.length?arr.map(n=>`
+    <tr onclick='openModal(${JSON.stringify(n).replace(/'/g,"&#39;")})'>
+      <td><strong>${n.cliente}</strong><br><span style="font-size:11px;color:var(--muted)">${n.cidade}</span></td>
+      <td><span class="badge b-gray">${n.grupo}</span></td>
+      <td style="font-size:12px">${n.modelo}</td>
+      <td><span class="badge ${EB[n.etapa]||'b-gray'}">${n.etapa}</span></td>
+      <td style="color:${probColor(n.prob)};font-size:13px">${'★'.repeat(n.prob)}</td>
+      <td class="right mono">${fmt(n.valor)}</td>
+      <td class="right mono ${n.dias>200?'c-red':n.dias>100?'c-amber':''}">${n.dias}d</td>
+      <td style="font-size:11px">${n.vendedor.split(',')[0].trim()}</td>
+    </tr>`).join('')
+  :'<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted)">Nenhum resultado</td></tr>';
+}
+
+// ── GLOBAL SEARCH ─────────────────────────────────────────────────
+function globalSearch(v){
+  if(!v.trim())return;
+  goTab('neg-lista',document.querySelector('.nav-item:nth-child(9)'));
+  document.getElementById('neg-search').value=v;
+  renderNegocios();
+}
+
+renderTabelaCarteira();
+renderNegocios();
 </script>
 </body>
 </html>
