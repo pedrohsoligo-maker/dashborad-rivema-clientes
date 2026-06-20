@@ -216,7 +216,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
     <div class="nav-label" style="margin-top:.4rem">Negociações</div>
     <div class="nav-item" onclick="goTab('neg-visao',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Visão pipeline
+      Visão funil de vendas
     </div>
     <div class="nav-item" onclick="goTab('neg-produtos',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -245,7 +245,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
   <div class="topbar">
     <div class="topbar-left">
       <h2 id="page-title">Resumo geral</h2>
-      <p id="page-sub">Visão consolidada — equipe comercial e pipeline de negociações</p>
+      <p id="page-sub">Visão consolidada — equipe comercial e funil de vendas</p>
     </div>
     <div class="search-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -258,9 +258,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
   ══════════════════════════════════════════ -->
   <div id="tab-home" class="section active">
     <div class="metrics-5">
-      <div class="metric"><div class="lbl">Total visitas</div><div class="val">891</div><div class="sub">Jan–Mai 2026</div></div>
-      <div class="metric"><div class="lbl">Clientes visitados</div><div class="val c-amber">442</div><div class="sub">de 728 na carteira</div></div>
-      <div class="metric"><div class="lbl">Pipeline total</div><div class="val c-green">R$ 122M</div><div class="sub">73 negócios ativos</div></div>
+      <div class="metric"><div class="lbl">Visitas na semana</div><div class="val">62</div><div class="sub">Semana atual</div></div>
+      <div class="metric"><div class="lbl">Clientes visitados</div><div class="val c-amber">487</div><div class="sub">de 864 na carteira</div></div>
+      <div class="metric"><div class="lbl">Funil de Vendas total</div><div class="val c-green">R$ 140,9M</div><div class="sub">75 negócios ativos</div></div>
       <div class="metric"><div class="lbl">Oportunidades CRM</div><div class="val c-blue">32</div><div class="sub">Em funil ativo</div></div>
       <div class="metric"><div class="lbl">Vendas fechadas</div><div class="val c-green">2</div><div class="sub">Paulo Pontelli</div></div>
     </div>
@@ -289,28 +289,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Pipeline por grupo de produto</div></div>
+        <div class="card-header"><div class="card-title">Funil de Vendas por grupo de produto</div></div>
         <div class="chart-wrap" style="height:230px">
-          <canvas id="c-home-grupos" role="img" aria-label="Pipeline por grupo: Plantio R$90,7M, Pulverização R$17,5M, Adubação R$5,7M, outros">Plantio: 90,7M. Pulverização: 17,5M. Adubação: 5,7M.</canvas>
+          <canvas id="c-home-grupos" role="img" aria-label="Funil de Vendas por grupo: Plantio R$91,7M, Pulverização R$17,5M, Adubação R$5,7M, outros">Plantio: 91,7M. Pulverização: 17,5M. Adubação: 5,7M.</canvas>
         </div>
       </div>
     </div>
     <div class="g3">
       <div class="card">
-        <div class="card-header"><div class="card-title">Visitas / semana</div></div>
-        <div class="stat-row"><div class="stat-lbl">Danilo Marques</div><div class="stat-val">9.6</div></div>
-        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">11.8</div></div>
-        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val c-green">19.3</div></div>
-        <div class="stat-row"><div class="stat-lbl">Ricardo Prado*</div><div class="stat-val c-amber">14.0</div></div>
-        <div class="stat-row"><div class="stat-lbl">Meta sugerida</div><div class="stat-val c-blue">15/sem</div></div>
+        <div class="card-header"><div class="card-title">Visitas na semana</div></div>
+        <div class="stat-row"><div class="stat-lbl">Danilo Marques</div><div class="stat-val c-green">29</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">19</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val c-amber">9</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Prado</div><div class="stat-val c-red">5</div></div>
+        <div class="stat-row"><div class="stat-lbl">Total grupo</div><div class="stat-val c-blue">62</div></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Pipeline por vendedor</div></div>
-        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val">R$ 55,4M</div></div>
-        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">R$ 35,7M</div></div>
+        <div class="card-header"><div class="card-title">Funil de Vendas por vendedor</div></div>
+        <div class="stat-row"><div class="stat-lbl">Ricardo Oliveira</div><div class="stat-val">R$ 55,6M</div></div>
+        <div class="stat-row"><div class="stat-lbl">Paulo Pontelli</div><div class="stat-val">R$ 36,7M</div></div>
         <div class="stat-row"><div class="stat-lbl">R. Prado</div><div class="stat-val">R$ 25,9M</div></div>
         <div class="stat-row"><div class="stat-lbl">Danilo Marques</div><div class="stat-val">R$ 22,7M</div></div>
-        <div class="stat-row"><div class="stat-lbl">Total</div><div class="stat-val c-green">R$ 122M</div></div>
+        <div class="stat-row"><div class="stat-lbl">Total</div><div class="stat-val c-green">R$ 140,9M</div></div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">Funil — distribuição</div></div>
@@ -330,70 +330,70 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
     <div class="vend-cards">
       <div class="vend-card destaque">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
-          <div><div class="vcard-name">Ricardo Oliveira Alves</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
-          <span class="badge b-green">Excelente campo</span>
+          <div><div class="vcard-name">Ricardo Oliveira Alves</div><div class="vcard-periodo">Semana atual · acumulado Jan–Jun 2026</div></div>
+          <span class="badge b-green">Maior funil de vendas</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val c-green">409</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val c-green">19.3</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">194</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-green">150%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val">8</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 55,4M</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.</span><span class="vcard-val c-amber">2.0%</span></div>
-        <div style="margin-top:.65rem"><span class="pill p-green">Alto volume</span><span class="pill p-amber">Converter mais</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas na semana</span><span class="vcard-val c-green">9</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes carteira</span><span class="vcard-val">164</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val c-green">198</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-green">120.7%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Novos negócios (sem.)</span><span class="vcard-val c-green">2</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Valor novos negócios</span><span class="vcard-val c-green">R$ 2,35M</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Funil de vendas</span><span class="vcard-val">R$ 55,6M</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-green">Melhor semana</span><span class="pill p-green">Maior funil de vendas</span></div>
       </div>
       <div class="vend-card destaque">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
-          <div><div class="vcard-name">Paulo Pontelli</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
+          <div><div class="vcard-name">Paulo Pontelli</div><div class="vcard-periodo">Semana atual · acumulado Jan–Jun 2026</div></div>
           <span class="badge b-green">Alto desempenho</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">250</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val">11.8</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">92</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">52%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val c-green">18</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 35,7M</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Vendas fechadas</span><span class="vcard-val c-green">2</span></div>
-        <div style="margin-top:.65rem"><span class="pill p-green">Melhor conversão</span><span class="pill p-green">2 vendas</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas na semana</span><span class="vcard-val c-green">19</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes carteira</span><span class="vcard-val">232</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">93</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">40.1%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Novos negócios (sem.)</span><span class="vcard-val c-green">1</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Valor novos negócios</span><span class="vcard-val c-green">R$ 980k</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Funil de vendas</span><span class="vcard-val">R$ 36,7M</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-green">Fechou negócio</span><span class="pill p-amber">Cobertura baixa</span></div>
       </div>
       <div class="vend-card atencao">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
-          <div><div class="vcard-name">Danilo Marques</div><div class="vcard-periodo">Jan–Mai 2026 · 106 dias · 21.2 semanas</div></div>
-          <span class="badge b-amber">Converter mais</span>
+          <div><div class="vcard-name">Danilo Marques</div><div class="vcard-periodo">Semana atual · acumulado Jan–Jun 2026</div></div>
+          <span class="badge b-amber">Maior volume, sem negócio</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">204</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana</span><span class="vcard-val">9.6</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">131</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">55%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val c-red">4</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 22,7M</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.</span><span class="vcard-val c-red">2.0%</span></div>
-        <div style="margin-top:.65rem"><span class="pill p-amber">Volume razoável</span><span class="pill p-red">Conversão crítica</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas na semana</span><span class="vcard-val c-green">29</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes carteira</span><span class="vcard-val">268</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">159</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-amber">59.3%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Novos negócios (sem.)</span><span class="vcard-val c-red">0</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Valor novos negócios</span><span class="vcard-val neutral">—</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Funil de vendas</span><span class="vcard-val">R$ 22,7M</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-green">Maior volume visitas</span><span class="pill p-red">0 negócios na semana</span></div>
       </div>
       <div class="vend-card integracao">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.45rem">
-          <div><div class="vcard-name">Ricardo Prado</div><div class="vcard-periodo">18–30/Mai 2026 · 10 dias · 2.0 semanas</div></div>
+          <div><div class="vcard-name">Ricardo Prado</div><div class="vcard-periodo">Semana atual · acumulado Jan–Jun 2026</div></div>
           <span class="badge b-blue">Em integração</span>
         </div>
-        <div class="vcard-stat"><span class="vcard-lbl">Visitas</span><span class="vcard-val">28</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Vis/semana*</span><span class="vcard-val c-amber">14.0</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">25</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-blue">14%</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Oportunidades CRM</span><span class="vcard-val">2</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Pipeline negoc.</span><span class="vcard-val">R$ 25,9M</span></div>
-        <div class="vcard-stat"><span class="vcard-lbl">Conv. vis→oport.*</span><span class="vcard-val">7.1%</span></div>
-        <div style="margin-top:.65rem"><span class="pill p-blue">10 dias úteis</span><span class="pill p-blue">Dados parciais</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Visitas na semana</span><span class="vcard-val c-amber">5</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes carteira</span><span class="vcard-val">200</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Clientes visitados</span><span class="vcard-val">37</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Cobertura</span><span class="vcard-val c-blue">18.5%</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Novos negócios (sem.)</span><span class="vcard-val c-red">0</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Valor novos negócios</span><span class="vcard-val neutral">—</span></div>
+        <div class="vcard-stat"><span class="vcard-lbl">Funil de vendas</span><span class="vcard-val">R$ 25,9M</span></div>
+        <div style="margin-top:.65rem"><span class="pill p-blue">Menor volume semanal</span><span class="pill p-amber">Acompanhar evolução</span></div>
       </div>
     </div>
     <div class="g2">
       <div class="card">
         <div class="card-header"><div class="card-title">Visitas realizadas</div></div>
         <div class="chart-wrap" style="height:200px">
-          <canvas id="c-vend-vis" role="img" aria-label="Visitas: R.Oliveira 409, Paulo 250, Danilo 204, R.Prado 28">R.Oliveira: 409. Paulo: 250. Danilo: 204. R.Prado: 28.</canvas>
+          <canvas id="c-vend-vis" role="img" aria-label="Visitas na semana: Danilo 29, Paulo 19, R.Oliveira 9, R.Prado 5">Danilo: 29. Paulo: 19. R.Oliveira: 9. R.Prado: 5.</canvas>
         </div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">Pipeline de negociações (R$)</div></div>
+        <div class="card-header"><div class="card-title">Funil de Vendas — negociações (R$)</div></div>
         <div id="vend-pipeline-bars"></div>
       </div>
     </div>
@@ -407,13 +407,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
       <div class="card">
         <div class="card-header"><div class="card-title">Distribuição por perfil</div></div>
         <div class="chart-wrap" style="height:220px">
-          <canvas id="c-perfil" role="img" aria-label="Perfis: A 337, B 139, C 91, D 161">A:337. B:139. C:91. D:161.</canvas>
+          <canvas id="c-perfil" role="img" aria-label="Perfis: A 341, B 148, C 100, D 149">A:341. B:148. C:100. D:149.</canvas>
         </div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">Perfil A por vendedor</div></div>
         <div class="chart-wrap" style="height:220px">
-          <canvas id="c-perfilA" role="img" aria-label="Perfil A: Danilo 117, Paulo 81, R.Oliveira 68, R.Prado 71">Danilo:117. Paulo:81. R.Oliveira:68. R.Prado:71.</canvas>
+          <canvas id="c-perfilA" role="img" aria-label="Perfil A: Danilo 113, Paulo 89, R.Oliveira 68, R.Prado 71">Danilo:113. Paulo:89. R.Oliveira:68. R.Prado:71.</canvas>
         </div>
       </div>
     </div>
@@ -422,11 +422,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
       <table class="tbl">
         <thead><tr><th>Vendedor</th><th class="right">Perfil A</th><th class="right">Perfil B</th><th class="right">Perfil C</th><th class="right">Perfil D</th><th class="right">Total</th><th class="right">Visitados</th><th class="right">Cobertura</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td><strong>Danilo Marques</strong></td><td class="num right">117</td><td class="num right">76</td><td class="num right">21</td><td class="num right">24</td><td class="num right"><strong>238</strong></td><td class="num right">131</td><td class="num right c-amber">55%</td><td><span class="badge b-amber">Parcial</span></td></tr>
-          <tr><td><strong>Paulo Pontelli</strong></td><td class="num right">81</td><td class="num right">26</td><td class="num right">29</td><td class="num right">42</td><td class="num right"><strong>178</strong></td><td class="num right">92</td><td class="num right c-amber">52%</td><td><span class="badge b-amber">Parcial</span></td></tr>
-          <tr><td><strong>Ricardo Oliveira</strong></td><td class="num right">68</td><td class="num right">16</td><td class="num right">17</td><td class="num right">28</td><td class="num right"><strong>129</strong></td><td class="num right c-green">194</td><td class="num right c-green">150%</td><td><span class="badge b-green">Excelente</span></td></tr>
-          <tr><td><strong>Ricardo Prado</strong></td><td class="num right">71</td><td class="num right">21</td><td class="num right">24</td><td class="num right">67</td><td class="num right"><strong>183</strong></td><td class="num right">25</td><td class="num right c-blue">14%*</td><td><span class="badge b-blue">Integração</span></td></tr>
-          <tr style="background:var(--gray-l)"><td><strong>TOTAL</strong></td><td class="num right"><strong>337</strong></td><td class="num right"><strong>139</strong></td><td class="num right"><strong>91</strong></td><td class="num right"><strong>161</strong></td><td class="num right"><strong>728</strong></td><td class="num right"><strong>442</strong></td><td class="num right"><strong>61%</strong></td><td><span class="badge b-amber">Parcial</span></td></tr>
+          <tr><td><strong>Danilo Marques</strong></td><td class="num right">113</td><td class="num right">76</td><td class="num right">33</td><td class="num right">25</td><td class="num right"><strong>268</strong></td><td class="num right">159</td><td class="num right c-amber">59.3%</td><td><span class="badge b-amber">Parcial</span></td></tr>
+          <tr><td><strong>Paulo Pontelli</strong></td><td class="num right">89</td><td class="num right">35</td><td class="num right">26</td><td class="num right">29</td><td class="num right"><strong>232</strong></td><td class="num right">93</td><td class="num right c-amber">40.1%</td><td><span class="badge b-amber">Parcial</span></td></tr>
+          <tr><td><strong>Ricardo Oliveira</strong></td><td class="num right">68</td><td class="num right">16</td><td class="num right">17</td><td class="num right">28</td><td class="num right"><strong>164</strong></td><td class="num right c-green">198</td><td class="num right c-green">120.7%</td><td><span class="badge b-green">Excelente</span></td></tr>
+          <tr><td><strong>Ricardo Prado</strong></td><td class="num right">71</td><td class="num right">21</td><td class="num right">24</td><td class="num right">67</td><td class="num right"><strong>200</strong></td><td class="num right">37</td><td class="num right c-blue">18.5%</td><td><span class="badge b-blue">Integração</span></td></tr>
+          <tr style="background:var(--gray-l)"><td><strong>TOTAL</strong></td><td class="num right"><strong>341</strong></td><td class="num right"><strong>148</strong></td><td class="num right"><strong>100</strong></td><td class="num right"><strong>149</strong></td><td class="num right"><strong>864</strong></td><td class="num right"><strong>487</strong></td><td class="num right"><strong>56.4%</strong></td><td><span class="badge b-amber">Parcial</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -469,16 +469,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
   ══════════════════════════════════════════ -->
   <div id="tab-neg-visao" class="section">
     <div class="metrics">
-      <div class="metric"><div class="lbl">Total negociações</div><div class="val">73</div><div class="sub">Em andamento</div></div>
-      <div class="metric"><div class="lbl">Pipeline total</div><div class="val c-green">R$ 122M</div><div class="sub">Valor dos produtos</div></div>
+      <div class="metric"><div class="lbl">Total negociações</div><div class="val">75</div><div class="sub">Em andamento</div></div>
+      <div class="metric"><div class="lbl">Funil de Vendas total</div><div class="val c-green">R$ 140,9M</div><div class="sub">Valor dos produtos</div></div>
       <div class="metric"><div class="lbl">Ticket médio</div><div class="val c-blue">R$ 1,67M</div><div class="sub">Por negociação</div></div>
-      <div class="metric"><div class="lbl">Maior grupo</div><div class="val c-red">Plantio</div><div class="sub">43 neg. · R$ 90,7M</div></div>
+      <div class="metric"><div class="lbl">Maior grupo</div><div class="val c-red">Plantio</div><div class="sub">44 neg. · R$ 91,7M</div></div>
     </div>
     <div class="g2">
       <div class="card">
         <div class="card-header"><div class="card-title">Negócios por grupo</div></div>
         <div class="chart-wrap" style="height:220px">
-          <canvas id="c-neg-grupos" role="img" aria-label="Grupos: Plantio 43, Pulverização 7, Processador 7, Adubação 6, Manejo 5">Plantio:43. Pulverização:7. Processador:7. Adubação:6. Manejo:5.</canvas>
+          <canvas id="c-neg-grupos" role="img" aria-label="Grupos: Plantio 44, Pulverização 7, Processador 7, Adubação 6, Manejo 5, Implementos 3">Plantio:44. Pulverização:7. Processador:7. Adubação:6. Manejo:5. Implementos:3.</canvas>
         </div>
       </div>
       <div class="card">
@@ -488,15 +488,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
     </div>
     <div class="g2">
       <div class="card">
-        <div class="card-header"><div class="card-title">Pipeline por grupo (R$)</div></div>
+        <div class="card-header"><div class="card-title">Funil de Vendas por grupo (R$)</div></div>
         <div class="chart-wrap" style="height:200px">
-          <canvas id="c-neg-val" role="img" aria-label="Valor: Plantio 90,7M, Pulverização 17,5M, Adubação 5,7M">Plantio:90,7M. Pulverização:17,5M. Adubação:5,7M.</canvas>
+          <canvas id="c-neg-val" role="img" aria-label="Valor: Plantio 91,7M, Pulverização 17,5M, Adubação 5,7M">Plantio:91,7M. Pulverização:17,5M. Adubação:5,7M.</canvas>
         </div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">Probabilidade de fechamento</div></div>
         <div class="chart-wrap" style="height:200px">
-          <canvas id="c-neg-prob" role="img" aria-label="Probabilidade: 1★ 23, 2★ 12, 3★ 14, 4★ 13, 5★ 11">1★:23. 2★:12. 3★:14. 4★:13. 5★:11.</canvas>
+          <canvas id="c-neg-prob" role="img" aria-label="Probabilidade: 1★ 23, 2★ 12, 3★ 14, 4★ 14, 5★ 12">1★:23. 2★:12. 3★:14. 4★:14. 5★:12.</canvas>
         </div>
       </div>
     </div>
@@ -539,7 +539,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
     </div>
     <div class="card">
       <div class="card-header"><div class="card-title">Etapas detalhadas</div></div>
-      <table class="tbl"><thead><tr><th>Funil</th><th>Etapa</th><th class="right">Qtd.</th><th class="right">Valor</th><th class="right">% pipeline</th></tr></thead>
+      <table class="tbl"><thead><tr><th>Funil</th><th>Etapa</th><th class="right">Qtd.</th><th class="right">Valor</th><th class="right">% funil</th></tr></thead>
       <tbody id="funil-tbl"></tbody></table>
     </div>
   </div>
@@ -603,29 +603,31 @@ body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text
 // DADOS — CARTEIRA
 // ═══════════════════════════════════════════════
 const CARTEIRA_DADOS=[
-  {vendedor:'Danilo Marques',perfil:'A',carteira:117,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
-  {vendedor:'Danilo Marques',perfil:'B',carteira:76,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
-  {vendedor:'Danilo Marques',perfil:'C',carteira:21,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
-  {vendedor:'Danilo Marques',perfil:'D',carteira:24,visitados:131,cobertura:55,visitas:204,visSem:9.6,oport:4,convVis:2.0,vendas:0,status:'atencao'},
-  {vendedor:'Paulo Pontelli',perfil:'A',carteira:81,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
-  {vendedor:'Paulo Pontelli',perfil:'B',carteira:26,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
-  {vendedor:'Paulo Pontelli',perfil:'C',carteira:29,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
-  {vendedor:'Paulo Pontelli',perfil:'D',carteira:42,visitados:92,cobertura:52,visitas:250,visSem:11.8,oport:18,convVis:7.2,vendas:2,status:'destaque'},
-  {vendedor:'R. Oliveira',perfil:'A',carteira:68,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
-  {vendedor:'R. Oliveira',perfil:'B',carteira:16,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
-  {vendedor:'R. Oliveira',perfil:'C',carteira:17,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
-  {vendedor:'R. Oliveira',perfil:'D',carteira:28,visitados:194,cobertura:150,visitas:409,visSem:19.3,oport:8,convVis:2.0,vendas:0,status:'destaque'},
-  {vendedor:'R. Prado',perfil:'A',carteira:71,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
-  {vendedor:'R. Prado',perfil:'B',carteira:21,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
-  {vendedor:'R. Prado',perfil:'C',carteira:24,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
-  {vendedor:'R. Prado',perfil:'D',carteira:67,visitados:25,cobertura:14,visitas:28,visSem:14.0,oport:2,convVis:7.1,vendas:0,status:'integracao'},
+  {vendedor:'Danilo Marques',perfil:'A',carteira:113,visitados:159,cobertura:59.3,visitas:29,visSem:29.0,oport:0,convVis:0.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'B',carteira:76,visitados:159,cobertura:59.3,visitas:29,visSem:29.0,oport:0,convVis:0.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'C',carteira:33,visitados:159,cobertura:59.3,visitas:29,visSem:29.0,oport:0,convVis:0.0,vendas:0,status:'atencao'},
+  {vendedor:'Danilo Marques',perfil:'D',carteira:25,visitados:159,cobertura:59.3,visitas:29,visSem:29.0,oport:0,convVis:0.0,vendas:0,status:'atencao'},
+  {vendedor:'Paulo Pontelli',perfil:'A',carteira:89,visitados:93,cobertura:40.1,visitas:19,visSem:19.0,oport:1,convVis:5.3,vendas:1,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'B',carteira:35,visitados:93,cobertura:40.1,visitas:19,visSem:19.0,oport:1,convVis:5.3,vendas:1,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'C',carteira:26,visitados:93,cobertura:40.1,visitas:19,visSem:19.0,oport:1,convVis:5.3,vendas:1,status:'destaque'},
+  {vendedor:'Paulo Pontelli',perfil:'D',carteira:29,visitados:93,cobertura:40.1,visitas:19,visSem:19.0,oport:1,convVis:5.3,vendas:1,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'A',carteira:68,visitados:198,cobertura:120.7,visitas:9,visSem:9.0,oport:2,convVis:22.2,vendas:2,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'B',carteira:16,visitados:198,cobertura:120.7,visitas:9,visSem:9.0,oport:2,convVis:22.2,vendas:2,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'C',carteira:17,visitados:198,cobertura:120.7,visitas:9,visSem:9.0,oport:2,convVis:22.2,vendas:2,status:'destaque'},
+  {vendedor:'R. Oliveira',perfil:'D',carteira:28,visitados:198,cobertura:120.7,visitas:9,visSem:9.0,oport:2,convVis:22.2,vendas:2,status:'destaque'},
+  {vendedor:'R. Prado',perfil:'A',carteira:71,visitados:37,cobertura:18.5,visitas:5,visSem:5.0,oport:0,convVis:0.0,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'B',carteira:21,visitados:37,cobertura:18.5,visitas:5,visSem:5.0,oport:0,convVis:0.0,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'C',carteira:24,visitados:37,cobertura:18.5,visitas:5,visSem:5.0,oport:0,convVis:0.0,vendas:0,status:'integracao'},
+  {vendedor:'R. Prado',perfil:'D',carteira:67,visitados:37,cobertura:18.5,visitas:5,visSem:5.0,oport:0,convVis:0.0,vendas:0,status:'integracao'},
 ];
 
 // ═══════════════════════════════════════════════
 // DADOS — NEGOCIAÇÕES
 // ═══════════════════════════════════════════════
 const NEGOCIOS=[
-  {cliente:'MAYKON TOMASI GIACOMINI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2100000,dias:1,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Conferir espaçamento de linha',prev:'07/07/2026'},
+  {cliente:'MAYKON TOMASI GIACOMINI',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 30.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:1,valor:2100000,dias:5,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Conferir espaçamento de linha',prev:'07/07/2026'},
+  {cliente:'Vagner Castanho Goulart',grupo:'PLANTIO',modelo:'MAESTRO CF 18.50',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:980000,dias:2,vendedor:'Paulo Pontelli',cidade:'Jataí/GO',obs:'462 horas e 483ha. Entrada R$238.000 + 2 parcelas R$28.000 + 56 parcelas R$16.300, ou entrada R$200.000 + parcelas 30/09, 30/11 e 30/03',prev:''},
+  {cliente:'ANTONIO MARCOS CARVALHO REZENDE',grupo:'IMPLEMENTOS',modelo:'VAGÃO FORRAGEIRO BS AGRO 12m³',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:5,valor:250000,dias:3,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Vagão forrageiro BS Agro 12 m³',prev:''},
   {cliente:'VALDECIR SOVERNIGO',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.50',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:2,valor:2500000,dias:4,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'',prev:'17/06/2026'},
   {cliente:'DOMINGOS PASSINATO',grupo:'PULVERIZAÇÃO',modelo:'PULVEIRIZADOR LEEB 5.280 VL',etapa:'1-Intenção de compra',funil:'1. Vendas',prob:4,valor:2650000,dias:253,vendedor:'RICARDO NASCIMENTO DO PRADO, Ricardo Oliveira Alves',cidade:'Mineiros/GO',obs:'',prev:'06/04/2026'},
   {cliente:'NILTON MARCIO DE OLIVEIRA',grupo:'PLANTIO',modelo:'MAESTRO EVOLUTION 36.45',etapa:'2-Negociação',funil:'1. Vendas',prob:4,valor:2520000,dias:14,vendedor:'Ricardo Oliveira Alves',cidade:'Jataí/GO',obs:'Espaçamento 0,45',prev:'10/09/2026'},
@@ -699,11 +701,11 @@ function probColor(n){return n>=4?'#3B6D11':n>=3?'#854F0B':'#888780'}
 
 // ── NAVIGATION ────────────────────────────────────────────────────
 const PAGE_TITLES={
-  home:['Resumo geral','Visão consolidada — equipe comercial e pipeline de negociações'],
+  home:['Resumo geral','Visão consolidada — equipe comercial e funil de vendas'],
   vendedores:['Vendedores','Perfil detalhado de cada vendedor'],
   carteira:['Carteira de clientes','Distribuição por perfil e vendedor'],
   'busca-carteira':['Busca — carteira','Pesquise e filtre por vendedor, perfil e status'],
-  'neg-visao':['Pipeline de negociações','Visão geral das negociações ativas — RIVEMA Jataí 2026'],
+  'neg-visao':['Funil de Vendas','Visão geral das negociações ativas — RIVEMA Jataí 2026'],
   'neg-produtos':['Produtos — negociações','Negócios por grupo e modelo de produto'],
   'neg-funil':['Funil & etapas','Distribuição de negócios por etapa do funil'],
   'neg-lista':['Todos os negócios','Lista completa com busca e filtros avançados'],
@@ -755,7 +757,7 @@ const sy={ticks:{color:txt},grid:{color:grid},border:{display:false},beginAtZero
 
 new Chart(document.getElementById('c-home-grupos'),{type:'doughnut',
   data:{labels:['Plantio','Pulverização','Adubação','Implementos','Proc.Palhada','Manejo Solo','Colheita','Aplic.Sulco'],
-    datasets:[{data:[90688050,17550000,5743300,3102035,1955000,2315000,605000,125000],
+    datasets:[{data:[91668050,17550000,5743300,3352035,1955000,2315000,605000,125000],
       backgroundColor:['#C0131A','#378ADD','#4CAF76','#D85A30','#EF9F27','#7F77DD','#1D9E75','#888780'],borderWidth:2,borderColor:'#fff'}]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'right',labels:{padding:8,font:{size:10},color:txt}},
@@ -764,32 +766,32 @@ new Chart(document.getElementById('c-home-grupos'),{type:'doughnut',
 
 new Chart(document.getElementById('c-vend-vis'),{type:'bar',
   data:{labels:['Danilo','Paulo','R.Oliveira','R.Prado'],
-    datasets:[{data:[204,250,409,28],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
+    datasets:[{data:[29,19,9,5],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
 new Chart(document.getElementById('c-perfil'),{type:'doughnut',
   data:{labels:['A (>1.001ha)','B (501-1.000ha)','C (201-500ha)','D (1-200ha)'],
-    datasets:[{data:[337,139,91,161],backgroundColor:['#C0131A','#EF9F27','#378ADD','#D3D1C7'],borderWidth:2,borderColor:'#fff'}]},
+    datasets:[{data:[341,148,100,149],backgroundColor:['#C0131A','#EF9F27','#378ADD','#D3D1C7'],borderWidth:2,borderColor:'#fff'}]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:10},color:txt}}}}
 });
 
 new Chart(document.getElementById('c-perfilA'),{type:'bar',
   data:{labels:['Danilo','Paulo','R.Oliveira','R.Prado'],
-    datasets:[{data:[117,81,68,71],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
+    datasets:[{data:[113,89,68,71],backgroundColor:['#EF9F27','#4CAF76','#C0131A','#378ADD'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
 new Chart(document.getElementById('c-neg-grupos'),{type:'bar',
   data:{labels:['Plantio','Pulverização','Proc.Palhada','Adubação','Manejo Solo','Implementos','Colheita'],
-    datasets:[{data:[43,7,7,6,5,2,2],backgroundColor:['#C0131A','#378ADD','#EF9F27','#4CAF76','#7F77DD','#D85A30','#1D9E75'],borderWidth:0}]},
+    datasets:[{data:[44,7,7,6,5,3,2],backgroundColor:['#C0131A','#378ADD','#EF9F27','#4CAF76','#7F77DD','#D85A30','#1D9E75'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
 new Chart(document.getElementById('c-neg-val'),{type:'bar',
   data:{labels:['Plantio','Pulverização','Adubação','Manejo','Implementos','Processador','Colheita'],
-    datasets:[{data:[90688050,17550000,5743300,2315000,3102035,1955000,605000],
+    datasets:[{data:[91668050,17550000,5743300,2315000,3352035,1955000,605000],
       backgroundColor:['#C0131A','#378ADD','#4CAF76','#7F77DD','#D85A30','#EF9F27','#1D9E75'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
     tooltip:{callbacks:{label:ctx=>fmtM(ctx.parsed.y)}}},scales:{x:sx,y:{...sy,ticks:{color:txt,callback:v=>fmtM(v)}}}}
@@ -797,7 +799,7 @@ new Chart(document.getElementById('c-neg-val'),{type:'bar',
 
 new Chart(document.getElementById('c-neg-prob'),{type:'bar',
   data:{labels:['★','★★','★★★','★★★★','★★★★★'],
-    datasets:[{data:[23,12,14,13,11],backgroundColor:['#D3D1C7','#B4B2A9','#EF9F27','#639922','#1A5E38'],borderWidth:0}]},
+    datasets:[{data:[23,12,14,14,12],backgroundColor:['#D3D1C7','#B4B2A9','#EF9F27','#639922','#1A5E38'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:sx,y:sy}}
 });
 
@@ -817,10 +819,10 @@ document.getElementById('top-modelos-neg').innerHTML=topModelos.map(d=>`
 
 // pipeline por vendedor
 const vendPipeline=[
-  {v:'R. Oliveira Alves',val:55386300},{v:'Paulo Pontelli',val:35700000},
+  {v:'R. Oliveira Alves',val:55636300},{v:'Paulo Pontelli',val:36680000},
   {v:'R. Prado',val:25899050},{v:'Danilo Marques',val:22682035},
 ];
-const maxVP=55386300;
+const maxVP=55636300;
 const VCORS=['#C0131A','#4CAF76','#378ADD','#EF9F27'];
 document.getElementById('vend-pipeline-bars').innerHTML=vendPipeline.map((d,i)=>`
   <div class="hbar-row">
